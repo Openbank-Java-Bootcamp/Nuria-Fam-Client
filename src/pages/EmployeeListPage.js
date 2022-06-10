@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { List, Button } from "antd";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 
 import EmployeeCard from "../components/EmployeeCard";
 
@@ -35,6 +35,9 @@ function EmployeeListPage() {
       >
         Back
       </Button>
+      <Link to={"/"}>
+        <Button>Add Employee</Button>
+      </Link>
       <List
         grid={{
           gutter: 16,

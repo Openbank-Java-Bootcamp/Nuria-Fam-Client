@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams, Link } from "react-router-dom";
 import { Image, Button } from "antd";
 
 const API_URL = "http://localhost:5005";
@@ -42,6 +42,9 @@ function DrinkDetailsPage() {
           <h2>{drink.name}</h2>
           <p>{drink.information}</p>
           <p>{drink.price} €</p>
+          <Link to={"/"}>
+            <Button>Edit Information</Button>
+          </Link>
         </>
       )}
     </div>

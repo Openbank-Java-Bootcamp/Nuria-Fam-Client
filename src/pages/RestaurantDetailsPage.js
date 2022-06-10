@@ -3,6 +3,7 @@ import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
 import { Image, Button, Card } from "antd";
 import { Link } from "react-router-dom";
+import EditRestaurant from "../components/EditRestaurant";
 
 const API_URL = "http://localhost:5005";
 
@@ -49,7 +50,10 @@ function RestaurantDetailsPage() {
             <br />
             {restaurant.address.city}, {restaurant.address.country}
           </p>
-
+          <EditRestaurant refreshRestaurant={getRestaurant} />
+          <Link to={"/"}>
+            <Button>Edit Information</Button>
+          </Link>
           <Link to={`/platecategory`}>
             <Card
               style={{

@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams, Link } from "react-router-dom";
 import { Image, Button } from "antd";
 
 const API_URL = "http://localhost:5005";
@@ -47,6 +47,9 @@ function EmployeeDetailsPage() {
           <h2>{employee.name}</h2>
           <p>{employee.phone}</p>
           <p>{employee.jobTitle}</p>
+          <Link to={"/"}>
+            <Button>Edit Information</Button>
+          </Link>
         </>
       )}
     </div>

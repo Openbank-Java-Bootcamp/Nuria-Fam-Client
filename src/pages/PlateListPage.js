@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams, Link } from "react-router-dom";
 import { List, Button } from "antd";
 
 import PlateCard from "../components/PlateCard";
@@ -33,6 +33,9 @@ function PlateListPage() {
         Back
       </Button>
       <h2>{plateCategoryName}</h2>
+      <Link to={"/"}>
+        <Button>Add Plate</Button>
+      </Link>
       <List
         grid={{
           gutter: 16,

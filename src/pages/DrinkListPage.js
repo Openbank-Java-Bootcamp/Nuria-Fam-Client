@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams, Link } from "react-router-dom";
 import { List, Button } from "antd";
 
 import DrinkCard from "../components/DrinkCard";
@@ -33,6 +33,9 @@ function DrinkListPage() {
         Back
       </Button>
       <h2>{drinkCategoryName}</h2>
+      <Link to={"/"}>
+        <Button>Add Drink</Button>
+      </Link>
       <List
         grid={{
           gutter: 16,

@@ -1,8 +1,7 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
-import { List } from "antd";
-import { Button } from "antd";
-import { useNavigate } from "react-router-dom";
+import { List, Button } from "antd";
+import { useNavigate, Link } from "react-router-dom";
 import PlateCategoryCard from "../components/PlateCategoryCard";
 
 const API_URL = "http://localhost:5005";
@@ -32,6 +31,9 @@ function PlateCategoryListPage() {
       >
         Back
       </Button>
+      <Link to={"/"}>
+        <Button>Add Category</Button>
+      </Link>
       <List
         grid={{
           gutter: 16,
