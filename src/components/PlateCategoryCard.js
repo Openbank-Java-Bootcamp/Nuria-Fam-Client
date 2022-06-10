@@ -5,10 +5,10 @@ const { Meta } = Card;
 function PlateCategoryCard({ id, name }) {
   return (
     <div>
-      <Link to={`/plates/category/${id}`}>
+      <Link to={`/plates/category/${id}/${name}`}>
         <Card
           style={{
-            width: 300,
+            width: 400,
           }}
         >
           <p>{name}</p>

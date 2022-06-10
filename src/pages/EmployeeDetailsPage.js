@@ -5,26 +5,31 @@ import { Image, Button } from "antd";
 
 const API_URL = "http://localhost:5005";
 
-function DrinkDetailsPage() {
-  const [drink, setDrink] = useState(null);
-  const { drinkId } = useParams();
+function EmployeeDetailsPage() {
+  const [employee, setEmployee] = useState(null);
+  const { employeeId } = useParams();
 
   const navigate = useNavigate();
 
-  const getDrink = () => {
+  const getEmployee = () => {
+    const storedToken = localStorage.getItem("authToken");
     axios
-      .get(`${API_URL}/api/drinks/${drinkId}`)
+      .get(`${API_URL}/api/employees/${employeeId}`, {
+        headers: { Authorization: `Bearer ${storedToken}` },
+      })
       .then((response) => {
-        setDrink(response.data);
+        setEmployee(response.data);
       })
       .catch((error) => console.log(error));
   };
+
   useEffect(() => {
-    getDrink();
+    getEmployee();
   }, []);
+
   return (
     <div>
-      {drink && (
+      {employee && (
         <>
           <Button
             onClick={() => {
@@ -34,17 +39,17 @@ function DrinkDetailsPage() {
             Back
           </Button>
           <Image
-            alt="Drink image"
+            alt="Employee image"
             preview={false}
             height={300}
-            src={drink.image}
+            src={employee.image}
           />
-          <h2>{drink.name}</h2>
-          <p>{drink.information}</p>
-          <p>{drink.price} €</p>
+          <h2>{employee.name}</h2>
+          <p>{employee.phone}</p>
+          <p>{employee.jobTitle}</p>
         </>
       )}
     </div>
   );
 }
-export default DrinkDetailsPage;
+export default EmployeeDetailsPage;

@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
-import { useParams } from "react-router-dom";
-import { List } from "antd";
+import { useNavigate, useParams } from "react-router-dom";
+import { List, Button } from "antd";
 
 import DrinkCard from "../components/DrinkCard";
 
@@ -9,7 +9,9 @@ const API_URL = "http://localhost:5005";
 
 function DrinkListPage() {
   const [drinks, setDrinks] = useState([]);
-  const { drinkCategoryId } = useParams();
+  const { drinkCategoryId, drinkCategoryName } = useParams();
+
+  const navigate = useNavigate();
 
   const getDrinks = () => {
     axios
@@ -23,6 +25,14 @@ function DrinkListPage() {
   }, []);
   return (
     <div>
+      <Button
+        onClick={() => {
+          navigate(-1);
+        }}
+      >
+        Back
+      </Button>
+      <h2>{drinkCategoryName}</h2>
       <List
         grid={{
           gutter: 16,
@@ -31,7 +41,7 @@ function DrinkListPage() {
         dataSource={drinks}
         renderItem={(drink) => (
           <List.Item>
-            <DrinkCard key={drink.id} {...drink} category={drinkCategoryId} />
+            <DrinkCard key={drink.id} {...drink} />
           </List.Item>
         )}
       />

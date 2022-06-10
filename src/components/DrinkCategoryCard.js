@@ -5,10 +5,10 @@ const { Meta } = Card;
 function DrinkCategoryCard({ id, name }) {
   return (
     <div>
-      <Link to={`/drinks/category/${id}`}>
+      <Link to={`/drinks/category/${id}/${name}`}>
         <Card
           style={{
-            width: 300,
+            width: 400,
           }}
         >
           <p>{name}</p>

@@ -8,7 +8,7 @@ function DrinkCard({ id, image, name, information }) {
       <Link to={`/drinks/${id}`}>
         <Card
           hoverable
-          style={{ width: 200 }}
+          style={{ width: 400 }}
           cover={<img alt="Drink image" src={image} />}
         >
           <Meta title={name} description={information} />

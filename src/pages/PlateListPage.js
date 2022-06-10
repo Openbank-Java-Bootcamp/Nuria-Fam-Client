@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
-import { useParams } from "react-router-dom";
-import { List } from "antd";
+import { useNavigate, useParams } from "react-router-dom";
+import { List, Button } from "antd";
 
 import PlateCard from "../components/PlateCard";
 
@@ -9,7 +9,9 @@ const API_URL = "http://localhost:5005";
 
 function PlateListPage() {
   const [plates, setPlates] = useState([]);
-  const { plateCategoryId } = useParams();
+  const { plateCategoryId, plateCategoryName } = useParams();
+
+  const navigate = useNavigate();
 
   const getPlates = () => {
     axios
@@ -23,6 +25,14 @@ function PlateListPage() {
   }, []);
   return (
     <div>
+      <Button
+        onClick={() => {
+          navigate(-1);
+        }}
+      >
+        Back
+      </Button>
+      <h2>{plateCategoryName}</h2>
       <List
         grid={{
           gutter: 16,
@@ -31,7 +41,7 @@ function PlateListPage() {
         dataSource={plates}
         renderItem={(plate) => (
           <List.Item>
-            <PlateCard key={plate.id} {...plate} category={plateCategoryId} />
+            <PlateCard key={plate.id} {...plate} />
           </List.Item>
         )}
       />
