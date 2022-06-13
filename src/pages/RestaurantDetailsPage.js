@@ -5,6 +5,7 @@ import { Image, Button, Card, Rate } from "antd";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../context/auth.context";
 import EditRestaurant from "../components/EditRestaurant";
+import IsOwner from "../components/IsOwner";
 import IsUser from "../components/IsUser";
 
 const API_URL = "http://localhost:5005";
@@ -16,13 +17,29 @@ function RestaurantDetailsPage() {
   const { isLoggedIn } = useContext(AuthContext);
   const [showForm, setForm] = useState(false);
 
+  const [ratingsList, setRatingsList] = useState([]);
+  const [rating, setRatingUser] = useState(0);
+  const [totalRating, setTotalRating] = useState(0);
+
   const navigate = useNavigate();
+
+  const storedToken = localStorage.getItem("authToken");
 
   const getRestaurant = () => {
     axios
       .get(`${API_URL}/api/restaurants/${restaurantId}`)
+      .then((response) => setRestaurant(response.data))
+      .catch((error) => console.log(error));
+  };
+
+  const getRatings = () => {
+    axios
+      .get(`${API_URL}/api/${restaurantId}/ratings`, {
+        headers: { Authorization: `Bearer ${storedToken}` },
+      })
       .then((response) => {
-        setRestaurant(response.data);
+        setRatingsList(response.data);
+        ratingAvg();
       })
       .catch((error) => console.log(error));
   };
@@ -31,11 +48,37 @@ function RestaurantDetailsPage() {
     setForm(!showForm);
   };
 
-  const handleRate = () => {
+  const handleSubmitRate = (e) => {
     e.preventDefault();
+
+    const requestBody = {
+      rating,
+      restaurantId,
+    };
+
+    axios
+      .post(`${API_URL}/api/ratings`, requestBody, {
+        headers: { Authorization: `Bearer ${storedToken}` },
+      })
+      .then((response) => {
+        setRatingUser(0);
+        ratingAvg();
+        getRestaurant();
+        getRatings();
+      });
+  };
+
+  const ratingAvg = () => {
+    const sum = ratingsList.reduce((accum, currValue) => {
+      return accum + currValue.rating;
+    }, 0);
+    const avg = sum / ratingsList.length;
+    const res = Math.round(avg * 100) / 100;
+    setTotalRating(res);
   };
 
   useEffect(() => {
+    getRatings();
     getRestaurant();
   }, []);
 
@@ -59,7 +102,8 @@ function RestaurantDetailsPage() {
           />
 
           <h2>{restaurant.name}</h2>
-          <Rate allowHalf disabled defaultValue={2} />
+          <Rate allowHalf disabled defaultValue={totalRating} />
+
           <p>{restaurant.phone}</p>
           <p>
             {restaurant.address.street}, {restaurant.address.number}
@@ -71,7 +115,7 @@ function RestaurantDetailsPage() {
             <>
               <IsUser>
                 <label>Rate:</label>
-                <select onChange={handleRate}>
+                <select onChange={(e) => setRatingUser(e.target.value)}>
                   <option value="">Rate the restaurant</option>
                   <option value="1">1</option>
                   <option value="2">2</option>
@@ -79,6 +123,9 @@ function RestaurantDetailsPage() {
                   <option value="4">4</option>
                   <option value="5">5</option>
                 </select>
+                <button type="submit" onClick={handleSubmitRate}>
+                  Rate
+                </button>
               </IsUser>
             </>
           )}
