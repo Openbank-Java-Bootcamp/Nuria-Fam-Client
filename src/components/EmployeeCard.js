@@ -2,16 +2,17 @@ import { Link } from "react-router-dom";
 import { Card } from "antd";
 const { Meta } = Card;
 
-function EmployeeCard({ id, image, name, jobTitle }) {
+function EmployeeCard(props) {
+  const { employee, restaurantId } = props;
   return (
     <div>
-      <Link to={`/employees/${id}`}>
+      <Link to={`/${restaurantId}/employees/${employee.id}`}>
         <Card
           hoverable
           style={{ width: 400 }}
-          cover={<img alt="Employee image" src={image} />}
+          cover={<img alt="Employee image" src={employee.image} />}
         >
-          <Meta title={name} description={jobTitle} />
+          <Meta title={employee.name} description={employee.jobTitle} />
         </Card>
       </Link>
     </div>

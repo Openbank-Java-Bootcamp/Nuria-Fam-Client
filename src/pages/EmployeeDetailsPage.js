@@ -1,13 +1,18 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import axios from "axios";
-import { useNavigate, useParams, Link } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { Image, Button } from "antd";
+import { AuthContext } from "../context/auth.context";
+import EditEmployee from "../components/EditEmployee";
 
 const API_URL = "http://localhost:5005";
 
 function EmployeeDetailsPage() {
   const [employee, setEmployee] = useState(null);
   const { employeeId } = useParams();
+
+  const { isLoggedIn } = useContext(AuthContext);
+  const [showForm, setForm] = useState(false);
 
   const navigate = useNavigate();
 
@@ -21,6 +26,10 @@ function EmployeeDetailsPage() {
         setEmployee(response.data);
       })
       .catch((error) => console.log(error));
+  };
+
+  const toggleShowFrom = () => {
+    setForm(!showForm);
   };
 
   useEffect(() => {
@@ -47,9 +56,20 @@ function EmployeeDetailsPage() {
           <h2>{employee.name}</h2>
           <p>{employee.phone}</p>
           <p>{employee.jobTitle}</p>
-          <Link to={"/"}>
-            <Button>Edit Information</Button>
-          </Link>
+
+          {isLoggedIn && (
+            <>
+              {showForm && (
+                <EditEmployee
+                  refreshEmployee={getEmployee}
+                  hideForm={toggleShowFrom}
+                />
+              )}
+              <Button onClick={toggleShowFrom}>
+                {showForm ? "Hide From" : "Edit Information"}
+              </Button>
+            </>
+          )}
         </>
       )}
     </div>

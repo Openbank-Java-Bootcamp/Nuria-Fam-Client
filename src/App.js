@@ -68,9 +68,12 @@ function App() {
             />
 
             {/* Routes for employee pages */}
-            <Route path="/employees" element={<EmployeeListPage />} />
             <Route
-              path="/employees/:employeeId"
+              path="/:restaurantId/employees"
+              element={<EmployeeListPage />}
+            />
+            <Route
+              path="/:restaurantId/employees/:employeeId"
               element={<EmployeeDetailsPage />}
             />
 

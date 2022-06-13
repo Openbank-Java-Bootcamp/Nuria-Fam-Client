@@ -87,7 +87,7 @@ function RestaurantDetailsPage() {
             </Card>
           </Link>
 
-          <Link to={`/employees`}>
+          <Link to={`/${restaurantId}/employees`}>
             <Card>
               <p>Employees</p>
             </Card>
