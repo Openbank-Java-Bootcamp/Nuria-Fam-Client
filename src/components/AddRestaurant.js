@@ -16,6 +16,8 @@ function AddRestaurant(props) {
   const { user } = useContext(AuthContext);
   const userId = user.id;
 
+  const storedToken = localStorage.getItem("authToken");
+
   const handleSubmit = (e) => {
     e.preventDefault();
     const requestBody = {
@@ -29,13 +31,11 @@ function AddRestaurant(props) {
       userId,
     };
 
-    const storedToken = localStorage.getItem("authToken");
     axios
       .post(`${API_URL}/api/restaurants`, requestBody, {
         headers: { Authorization: `Bearer ${storedToken}` },
       })
       .then((response) => {
-        // Reset the state
         setName("");
         setPhone("");
         setStreet("");
@@ -44,6 +44,7 @@ function AddRestaurant(props) {
         setCountry("");
         setImage("");
         props.refreshRestaurants();
+        props.hideForm();
       })
       .catch((error) => console.log(error));
   };

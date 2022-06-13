@@ -32,7 +32,7 @@ function LoginPage(props) {
 
         storeToken(response.data.authToken);
         authenticateUser();
-        navigate("/"); // <== ADD
+        navigate("/");
       })
       .catch((error) => {
         const errorDescription = error.response.data.errors[0].defaultMessage;

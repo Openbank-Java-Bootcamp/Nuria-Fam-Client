@@ -1,13 +1,18 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import axios from "axios";
-import { useNavigate, useParams, Link } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { Image, Button } from "antd";
+import { AuthContext } from "../context/auth.context";
+import EditPlate from "../components/EditPlate";
 
 const API_URL = "http://localhost:5005";
 
 function PlateDetailsPage() {
   const [plate, setPlate] = useState(null);
   const { plateId } = useParams();
+
+  const { isLoggedIn } = useContext(AuthContext);
+  const [showForm, setForm] = useState(false);
 
   const navigate = useNavigate();
 
@@ -19,9 +24,15 @@ function PlateDetailsPage() {
       })
       .catch((error) => console.log(error));
   };
+
+  const toggleShowFrom = () => {
+    setForm(!showForm);
+  };
+
   useEffect(() => {
     getPlate();
   }, []);
+
   return (
     <div>
       {plate && (
@@ -42,9 +53,17 @@ function PlateDetailsPage() {
           <h2>{plate.name}</h2>
           <p>{plate.ingredients}</p>
           <p>{plate.price} €</p>
-          <Link to={"/"}>
-            <Button>Edit Information</Button>
-          </Link>
+
+          {isLoggedIn && (
+            <>
+              {showForm && (
+                <EditPlate refreshPlate={getPlate} hideForm={toggleShowFrom} />
+              )}
+              <Button onClick={toggleShowFrom}>
+                {showForm ? "Hide From" : "Edit Information"}
+              </Button>
+            </>
+          )}
         </>
       )}
     </div>

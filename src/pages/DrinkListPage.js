@@ -1,13 +1,17 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import axios from "axios";
-import { useNavigate, useParams, Link } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { List, Button } from "antd";
-
+import { AuthContext } from "../context/auth.context";
 import DrinkCard from "../components/DrinkCard";
+import AddDrink from "../components/AddDrink";
 
 const API_URL = "http://localhost:5005";
 
 function DrinkListPage() {
+  const { isLoggedIn } = useContext(AuthContext);
+  const [showForm, setForm] = useState(false);
+
   const [drinks, setDrinks] = useState([]);
   const { drinkCategoryId, drinkCategoryName } = useParams();
 
@@ -20,9 +24,14 @@ function DrinkListPage() {
       .catch((error) => console.log(error));
   };
 
+  const toggleShowFrom = () => {
+    setForm(!showForm);
+  };
+
   useEffect(() => {
     getDrinks();
   }, []);
+
   return (
     <div>
       <Button
@@ -32,10 +41,19 @@ function DrinkListPage() {
       >
         Back
       </Button>
+
       <h2>{drinkCategoryName}</h2>
-      <Link to={"/"}>
-        <Button>Add Drink</Button>
-      </Link>
+
+      {isLoggedIn && (
+        <>
+          {showForm && (
+            <AddDrink refreshDrinks={getDrinks} hideForm={toggleShowFrom} />
+          )}
+          <Button onClick={toggleShowFrom}>
+            {showForm ? "Hide From" : "Add Drink"}
+          </Button>
+        </>
+      )}
       <List
         grid={{
           gutter: 16,
@@ -44,7 +62,11 @@ function DrinkListPage() {
         dataSource={drinks}
         renderItem={(drink) => (
           <List.Item>
-            <DrinkCard key={drink.id} {...drink} />
+            <DrinkCard
+              key={drink.id}
+              drink={drink}
+              drinkCategoryId={drinkCategoryId}
+            />
           </List.Item>
         )}
       />

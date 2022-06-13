@@ -1,13 +1,18 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import axios from "axios";
-import { useNavigate, useParams, Link } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { Image, Button } from "antd";
+import { AuthContext } from "../context/auth.context";
+import EditDrink from "../components/EditDrink";
 
 const API_URL = "http://localhost:5005";
 
 function DrinkDetailsPage() {
   const [drink, setDrink] = useState(null);
   const { drinkId } = useParams();
+
+  const { isLoggedIn } = useContext(AuthContext);
+  const [showForm, setForm] = useState(false);
 
   const navigate = useNavigate();
 
@@ -19,9 +24,15 @@ function DrinkDetailsPage() {
       })
       .catch((error) => console.log(error));
   };
+
+  const toggleShowFrom = () => {
+    setForm(!showForm);
+  };
+
   useEffect(() => {
     getDrink();
   }, []);
+
   return (
     <div>
       {drink && (
@@ -42,9 +53,17 @@ function DrinkDetailsPage() {
           <h2>{drink.name}</h2>
           <p>{drink.information}</p>
           <p>{drink.price} €</p>
-          <Link to={"/"}>
-            <Button>Edit Information</Button>
-          </Link>
+
+          {isLoggedIn && (
+            <>
+              {showForm && (
+                <EditDrink refreshDrink={getDrink} hideForm={toggleShowFrom} />
+              )}
+              <Button onClick={toggleShowFrom}>
+                {showForm ? "Hide From" : "Edit Information"}
+              </Button>
+            </>
+          )}
         </>
       )}
     </div>

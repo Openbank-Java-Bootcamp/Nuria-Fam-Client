@@ -38,7 +38,7 @@ function UserDetailsPage() {
           >
             Back
           </Button>
-          {user.image == "" ? (
+          {user.image == null || user.image == "" ? (
             // If the user doesn't have image
             <Image
               width={200}

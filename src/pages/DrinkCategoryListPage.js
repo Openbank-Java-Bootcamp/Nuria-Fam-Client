@@ -1,21 +1,31 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import { List, Button } from "antd";
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
+import { AuthContext } from "../context/auth.context";
 import DrinkCategoryCard from "../components/DrinkCategoryCard";
+import AddDrinkCategory from "../components/AddDrinkCategory";
 
 const API_URL = "http://localhost:5005";
 
 function DrinkCategoryListPage() {
+  const { isLoggedIn } = useContext(AuthContext);
+  const [showForm, setForm] = useState(false);
+
   const [categories, setCategories] = useState([]);
+  const { restaurantId } = useParams();
 
   const navigate = useNavigate();
 
   const getAllCategories = () => {
     axios
-      .get(`${API_URL}/api/drinkcategory`)
+      .get(`${API_URL}/api/${restaurantId}/drinkcategory`)
       .then((response) => setCategories(response.data))
       .catch((error) => console.log(error));
+  };
+
+  const toggleShowFrom = () => {
+    setForm(!showForm);
   };
 
   useEffect(() => {
@@ -31,9 +41,19 @@ function DrinkCategoryListPage() {
       >
         Back
       </Button>
-      <Link to={"/"}>
-        <Button>Add Category</Button>
-      </Link>
+      {isLoggedIn && (
+        <>
+          {showForm && (
+            <AddDrinkCategory
+              refreshCategories={getAllCategories}
+              hideForm={toggleShowFrom}
+            />
+          )}
+          <Button onClick={toggleShowFrom}>
+            {showForm ? "Hide From" : "Add Category"}
+          </Button>
+        </>
+      )}
       <List
         grid={{
           gutter: 16,

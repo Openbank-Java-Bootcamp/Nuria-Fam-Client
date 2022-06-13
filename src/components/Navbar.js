@@ -12,7 +12,7 @@ function Navbar() {
         <Link to={`/users/${user.id}`}>
           <Avatar
             alt="User image"
-            size={64}
+            size={50}
             icon={<UserOutlined />}
             src={user.image}
           />

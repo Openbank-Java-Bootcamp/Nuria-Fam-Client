@@ -18,63 +18,84 @@ import EmployeeDetailsPage from "./pages/EmployeeDetailsPage";
 import EmployeeListPage from "./pages/EmployeeListPage";
 import UserDetailsPage from "./pages/UserDetailsPage";
 
+import { Layout } from "antd";
+const { Header, Footer, Sider, Content } = Layout;
+
 function App() {
   return (
     <div className="App">
-      <Navbar />
-      <Routes>
-        <Route path="/" element={<HomePage />} />
+      <Layout>
+        <Header>
+          <Navbar />
+        </Header>
+        <Content style={{ backgroundColor: "white" }}>
+          <Routes>
+            <Route path="/" element={<HomePage />} />
 
-        {/* Routes for restaurant pages */}
-        <Route path="/restaurants" element={<RestaurantListPage />} />
-        <Route
-          path="/restaurants/:restaurantId"
-          element={<RestaurantDetailsPage />}
-        />
+            {/* Routes for restaurant pages */}
+            <Route path="/restaurants" element={<RestaurantListPage />} />
+            <Route
+              path="/restaurants/:restaurantId"
+              element={<RestaurantDetailsPage />}
+            />
 
-        {/* Routes for plate pages */}
-        <Route path="/platecategory" element={<PlateCategoryListPage />} />
-        <Route
-          path="/plates/category/:plateCategoryId/:plateCategoryName"
-          element={<PlateListPage />}
-        />
-        <Route path="/plates/:plateId" element={<PlateDetailsPage />} />
+            {/* Routes for plate pages */}
+            <Route
+              path="/:restaurantId/platecategory"
+              element={<PlateCategoryListPage />}
+            />
+            <Route
+              path="/plates/category/:plateCategoryId/:plateCategoryName"
+              element={<PlateListPage />}
+            />
+            <Route
+              path="/plates/:plateCategoryId/:plateId"
+              element={<PlateDetailsPage />}
+            />
 
-        {/* Routes for drink pages */}
-        <Route path="/drinkcategory" element={<DrinkCategoryListPage />} />
-        <Route
-          path="/drinks/category/:drinkCategoryId/:drinkCategoryName"
-          element={<DrinkListPage />}
-        />
-        <Route path="/drinks/:drinkId" element={<DrinkDetailsPage />} />
+            {/* Routes for drink pages */}
+            <Route
+              path="/:restaurantId/drinkcategory"
+              element={<DrinkCategoryListPage />}
+            />
+            <Route
+              path="/drinks/category/:drinkCategoryId/:drinkCategoryName"
+              element={<DrinkListPage />}
+            />
+            <Route
+              path="/drinks/:drinkCategoryId/:drinkId"
+              element={<DrinkDetailsPage />}
+            />
 
-        {/* Routes for employee pages */}
-        <Route path="/employees" element={<EmployeeListPage />} />
-        <Route
-          path="/employees/:employeeId"
-          element={<EmployeeDetailsPage />}
-        />
+            {/* Routes for employee pages */}
+            <Route path="/employees" element={<EmployeeListPage />} />
+            <Route
+              path="/employees/:employeeId"
+              element={<EmployeeDetailsPage />}
+            />
 
-        {/* Routes for user pages */}
-        <Route path="/users/:userId" element={<UserDetailsPage />} />
+            {/* Routes for user pages */}
+            <Route path="/users/:userId" element={<UserDetailsPage />} />
 
-        <Route
-          path="/signup"
-          element={
-            <IsAnon>
-              <SignupPage />
-            </IsAnon>
-          }
-        />
-        <Route
-          path="/login"
-          element={
-            <IsAnon>
-              <LoginPage />
-            </IsAnon>
-          }
-        />
-      </Routes>
+            <Route
+              path="/signup"
+              element={
+                <IsAnon>
+                  <SignupPage />
+                </IsAnon>
+              }
+            />
+            <Route
+              path="/login"
+              element={
+                <IsAnon>
+                  <LoginPage />
+                </IsAnon>
+              }
+            />
+          </Routes>
+        </Content>
+      </Layout>
     </div>
   );
 }

@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { Card, Button } from "antd";
+import { Card } from "antd";
 const { Meta } = Card;
 
 function RestaurantCard({ id, image, name }) {

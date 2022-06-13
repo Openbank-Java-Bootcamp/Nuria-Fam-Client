@@ -21,8 +21,9 @@ function EditRestaurant(props) {
 
   const navigate = useNavigate();
 
+  const storedToken = localStorage.getItem("authToken");
+
   useEffect(() => {
-    const storedToken = localStorage.getItem("authToken");
     axios
       .get(`${API_URL}/api/restaurants/${restaurantId}`, {
         headers: { Authorization: `Bearer ${storedToken}` },
@@ -42,8 +43,6 @@ function EditRestaurant(props) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const storedToken = localStorage.getItem("authToken");
-
     const requestBody = {
       name,
       phone,
@@ -61,11 +60,11 @@ function EditRestaurant(props) {
       })
       .then((response) => {
         props.refreshRestaurant();
+        props.hideForm();
       });
   };
 
   const deleteRestaurant = () => {
-    const storedToken = localStorage.getItem("authToken");
     axios
       .delete(`${API_URL}/api/restaurants/${restaurantId}`, {
         headers: { Authorization: `Bearer ${storedToken}` },
@@ -78,6 +77,8 @@ function EditRestaurant(props) {
 
   return (
     <div>
+      <h3>Edit Restaurant</h3>
+
       <form onSubmit={handleSubmit}>
         <label>Name</label>
         <input

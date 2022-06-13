@@ -1,6 +1,5 @@
 import { Link } from "react-router-dom";
 import { Card } from "antd";
-const { Meta } = Card;
 
 function DrinkCategoryCard({ id, name }) {
   return (

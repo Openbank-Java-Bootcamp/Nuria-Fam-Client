@@ -1,13 +1,18 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import axios from "axios";
-import { useNavigate, useParams, Link } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { List, Button } from "antd";
+import { AuthContext } from "../context/auth.context";
 
 import PlateCard from "../components/PlateCard";
+import AddPlate from "../components/AddPlate";
 
 const API_URL = "http://localhost:5005";
 
 function PlateListPage() {
+  const { isLoggedIn } = useContext(AuthContext);
+  const [showForm, setForm] = useState(false);
+
   const [plates, setPlates] = useState([]);
   const { plateCategoryId, plateCategoryName } = useParams();
 
@@ -20,9 +25,14 @@ function PlateListPage() {
       .catch((error) => console.log(error));
   };
 
+  const toggleShowFrom = () => {
+    setForm(!showForm);
+  };
+
   useEffect(() => {
     getPlates();
   }, []);
+
   return (
     <div>
       <Button
@@ -32,10 +42,19 @@ function PlateListPage() {
       >
         Back
       </Button>
+
       <h2>{plateCategoryName}</h2>
-      <Link to={"/"}>
-        <Button>Add Plate</Button>
-      </Link>
+
+      {isLoggedIn && (
+        <>
+          {showForm && (
+            <AddPlate refreshPlates={getPlates} hideForm={toggleShowFrom} />
+          )}
+          <Button onClick={toggleShowFrom}>
+            {showForm ? "Hide From" : "Add Plate"}
+          </Button>
+        </>
+      )}
       <List
         grid={{
           gutter: 16,
@@ -44,7 +63,11 @@ function PlateListPage() {
         dataSource={plates}
         renderItem={(plate) => (
           <List.Item>
-            <PlateCard key={plate.id} {...plate} />
+            <PlateCard
+              key={plate.id}
+              plate={plate}
+              plateCategoryId={plateCategoryId}
+            />
           </List.Item>
         )}
       />
