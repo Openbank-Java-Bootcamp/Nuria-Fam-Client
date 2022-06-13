@@ -5,6 +5,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { AuthContext } from "../context/auth.context";
 import DrinkCategoryCard from "../components/DrinkCategoryCard";
 import AddDrinkCategory from "../components/AddDrinkCategory";
+import IsOwner from "../components/IsOwner";
 
 const API_URL = "http://localhost:5005";
 
@@ -43,15 +44,17 @@ function DrinkCategoryListPage() {
       </Button>
       {isLoggedIn && (
         <>
-          {showForm && (
-            <AddDrinkCategory
-              refreshCategories={getAllCategories}
-              hideForm={toggleShowFrom}
-            />
-          )}
-          <Button onClick={toggleShowFrom}>
-            {showForm ? "Hide From" : "Add Category"}
-          </Button>
+          <IsOwner>
+            {showForm && (
+              <AddDrinkCategory
+                refreshCategories={getAllCategories}
+                hideForm={toggleShowFrom}
+              />
+            )}
+            <Button onClick={toggleShowFrom}>
+              {showForm ? "Hide From" : "Add Category"}
+            </Button>
+          </IsOwner>
         </>
       )}
       <List

@@ -88,6 +88,7 @@ function EditUser(props) {
 
         <label>Name:</label>
         <input type="text" name="name" value={name} onChange={handleName} />
+
         <label>Image</label>
         <input type="text" name="image" value={image} onChange={handleImage} />
 

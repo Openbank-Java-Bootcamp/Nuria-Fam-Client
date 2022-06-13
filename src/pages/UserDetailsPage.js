@@ -8,11 +8,12 @@ import EditUser from "../components/EditUser";
 const API_URL = "http://localhost:5005";
 
 function UserDetailsPage() {
-  const [user, setUser] = useState(null);
-  const { userId } = useParams();
-
-  const { isLoggedIn } = useContext(AuthContext);
+  const { isLoggedIn, user } = useContext(AuthContext);
   const [showForm, setForm] = useState(false);
+
+  const [user1, setUser] = useState(null);
+  const { userId } = useParams();
+  const [role, setRole] = useState(user.role);
 
   const navigate = useNavigate();
 
@@ -24,6 +25,7 @@ function UserDetailsPage() {
       })
       .then((response) => {
         setUser(response.data);
+        setRole(user.role);
       })
       .catch((error) => console.log(error));
   };
@@ -38,7 +40,7 @@ function UserDetailsPage() {
 
   return (
     <div>
-      {user && (
+      {user1 && (
         <>
           <Button
             onClick={() => {
@@ -47,7 +49,7 @@ function UserDetailsPage() {
           >
             Back
           </Button>
-          {user.image == "" ? (
+          {user1.image == "" ? (
             // If the user doesn't have image
             <Image
               width={200}
@@ -63,8 +65,9 @@ function UserDetailsPage() {
               src={user.image}
             />
           )}
-          <h2>{user.name}</h2>
-          <p>{user.email}</p>
+          <h2>{user1.name}</h2>
+          <p>{user1.email}</p>
+          <p>{user.role}</p>
 
           {isLoggedIn && (
             <>

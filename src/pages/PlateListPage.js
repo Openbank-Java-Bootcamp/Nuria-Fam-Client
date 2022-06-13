@@ -6,6 +6,7 @@ import { AuthContext } from "../context/auth.context";
 
 import PlateCard from "../components/PlateCard";
 import AddPlate from "../components/AddPlate";
+import IsOwner from "../components/IsOwner";
 
 const API_URL = "http://localhost:5005";
 
@@ -47,12 +48,14 @@ function PlateListPage() {
 
       {isLoggedIn && (
         <>
-          {showForm && (
-            <AddPlate refreshPlates={getPlates} hideForm={toggleShowFrom} />
-          )}
-          <Button onClick={toggleShowFrom}>
-            {showForm ? "Hide From" : "Add Plate"}
-          </Button>
+          <IsOwner>
+            {showForm && (
+              <AddPlate refreshPlates={getPlates} hideForm={toggleShowFrom} />
+            )}
+            <Button onClick={toggleShowFrom}>
+              {showForm ? "Hide From" : "Add Plate"}
+            </Button>
+          </IsOwner>
         </>
       )}
       <List

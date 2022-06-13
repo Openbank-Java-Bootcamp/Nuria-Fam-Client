@@ -4,6 +4,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { Image, Button } from "antd";
 import { AuthContext } from "../context/auth.context";
 import EditDrink from "../components/EditDrink";
+import IsOwner from "../components/IsOwner";
 
 const API_URL = "http://localhost:5005";
 
@@ -56,12 +57,17 @@ function DrinkDetailsPage() {
 
           {isLoggedIn && (
             <>
-              {showForm && (
-                <EditDrink refreshDrink={getDrink} hideForm={toggleShowFrom} />
-              )}
-              <Button onClick={toggleShowFrom}>
-                {showForm ? "Hide From" : "Edit Information"}
-              </Button>
+              <IsOwner>
+                {showForm && (
+                  <EditDrink
+                    refreshDrink={getDrink}
+                    hideForm={toggleShowFrom}
+                  />
+                )}
+                <Button onClick={toggleShowFrom}>
+                  {showForm ? "Hide From" : "Edit Information"}
+                </Button>
+              </IsOwner>
             </>
           )}
         </>

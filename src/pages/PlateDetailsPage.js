@@ -4,6 +4,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { Image, Button } from "antd";
 import { AuthContext } from "../context/auth.context";
 import EditPlate from "../components/EditPlate";
+import IsOwner from "../components/IsOwner";
 
 const API_URL = "http://localhost:5005";
 
@@ -56,12 +57,17 @@ function PlateDetailsPage() {
 
           {isLoggedIn && (
             <>
-              {showForm && (
-                <EditPlate refreshPlate={getPlate} hideForm={toggleShowFrom} />
-              )}
-              <Button onClick={toggleShowFrom}>
-                {showForm ? "Hide From" : "Edit Information"}
-              </Button>
+              <IsOwner>
+                {showForm && (
+                  <EditPlate
+                    refreshPlate={getPlate}
+                    hideForm={toggleShowFrom}
+                  />
+                )}
+                <Button onClick={toggleShowFrom}>
+                  {showForm ? "Hide From" : "Edit Information"}
+                </Button>
+              </IsOwner>
             </>
           )}
         </>

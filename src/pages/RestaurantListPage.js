@@ -4,6 +4,7 @@ import { List, Button } from "antd";
 import { AuthContext } from "../context/auth.context";
 import RestaurantCard from "../components/RestaurantCard";
 import AddRestaurant from "../components/AddRestaurant";
+import IsOwner from "../components/IsOwner";
 
 const API_URL = "http://localhost:5005";
 
@@ -32,15 +33,17 @@ function RestaurantListPage() {
     <div>
       {isLoggedIn && (
         <>
-          {showForm && (
-            <AddRestaurant
-              refreshRestaurants={getAllRestaurants}
-              hideForm={toggleShowFrom}
-            />
-          )}
-          <Button onClick={toggleShowFrom}>
-            {showForm ? "Hide From" : "Add Restaurant"}
-          </Button>
+          <IsOwner>
+            {showForm && (
+              <AddRestaurant
+                refreshRestaurants={getAllRestaurants}
+                hideForm={toggleShowFrom}
+              />
+            )}
+            <Button onClick={toggleShowFrom}>
+              {showForm ? "Hide From" : "Add Restaurant"}
+            </Button>
+          </IsOwner>
         </>
       )}
       <List

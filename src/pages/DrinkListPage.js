@@ -5,6 +5,7 @@ import { List, Button } from "antd";
 import { AuthContext } from "../context/auth.context";
 import DrinkCard from "../components/DrinkCard";
 import AddDrink from "../components/AddDrink";
+import IsOwner from "../components/IsOwner";
 
 const API_URL = "http://localhost:5005";
 
@@ -46,12 +47,14 @@ function DrinkListPage() {
 
       {isLoggedIn && (
         <>
-          {showForm && (
-            <AddDrink refreshDrinks={getDrinks} hideForm={toggleShowFrom} />
-          )}
-          <Button onClick={toggleShowFrom}>
-            {showForm ? "Hide From" : "Add Drink"}
-          </Button>
+          <IsOwner>
+            {showForm && (
+              <AddDrink refreshDrinks={getDrinks} hideForm={toggleShowFrom} />
+            )}
+            <Button onClick={toggleShowFrom}>
+              {showForm ? "Hide From" : "Add Drink"}
+            </Button>
+          </IsOwner>
         </>
       )}
       <List

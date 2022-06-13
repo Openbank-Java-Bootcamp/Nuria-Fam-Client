@@ -5,6 +5,7 @@ import { Image, Button, Card } from "antd";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../context/auth.context";
 import EditRestaurant from "../components/EditRestaurant";
+import IsOwner from "../components/IsOwner";
 
 const API_URL = "http://localhost:5005";
 
@@ -63,15 +64,17 @@ function RestaurantDetailsPage() {
 
           {isLoggedIn && (
             <>
-              {showForm && (
-                <EditRestaurant
-                  refreshRestaurant={getRestaurant}
-                  hideForm={toggleShowFrom}
-                />
-              )}
-              <Button onClick={toggleShowFrom}>
-                {showForm ? "Hide From" : "Edit Information"}
-              </Button>
+              <IsOwner>
+                {showForm && (
+                  <EditRestaurant
+                    refreshRestaurant={getRestaurant}
+                    hideForm={toggleShowFrom}
+                  />
+                )}
+                <Button onClick={toggleShowFrom}>
+                  {showForm ? "Hide From" : "Edit Information"}
+                </Button>
+              </IsOwner>
             </>
           )}
 
@@ -86,12 +89,15 @@ function RestaurantDetailsPage() {
               <p>Drinks</p>
             </Card>
           </Link>
-
-          <Link to={`/${restaurantId}/employees`}>
-            <Card>
-              <p>Employees</p>
-            </Card>
-          </Link>
+          {isLoggedIn && (
+            <IsOwner>
+              <Link to={`/${restaurantId}/employees`}>
+                <Card>
+                  <p>Employees</p>
+                </Card>
+              </Link>
+            </IsOwner>
+          )}
         </>
       )}
     </div>
