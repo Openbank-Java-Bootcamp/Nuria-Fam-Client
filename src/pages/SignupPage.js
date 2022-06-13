@@ -10,6 +10,7 @@ function SignupPage(props) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [name, setName] = useState("");
+  const [image, setImage] = useState("");
   const [errorMessage, setErrorMessage] = useState(undefined);
 
   const navigate = useNavigate();
@@ -21,7 +22,7 @@ function SignupPage(props) {
   const handleSignupSubmit = (e) => {
     e.preventDefault();
     // Create an object representing the request body
-    const requestBody = { email, password, name };
+    const requestBody = { email, password, name, image };
 
     // Make an axios request to the API
     // If POST request is successful redirect to login page

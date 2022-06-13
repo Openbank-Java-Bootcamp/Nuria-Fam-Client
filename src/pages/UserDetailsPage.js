@@ -1,13 +1,18 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import axios from "axios";
-import { useNavigate, useParams, Link } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { Image, Button } from "antd";
+import { AuthContext } from "../context/auth.context";
+import EditUser from "../components/EditUser";
 
 const API_URL = "http://localhost:5005";
 
 function UserDetailsPage() {
   const [user, setUser] = useState(null);
   const { userId } = useParams();
+
+  const { isLoggedIn } = useContext(AuthContext);
+  const [showForm, setForm] = useState(false);
 
   const navigate = useNavigate();
 
@@ -21,6 +26,10 @@ function UserDetailsPage() {
         setUser(response.data);
       })
       .catch((error) => console.log(error));
+  };
+
+  const toggleShowFrom = () => {
+    setForm(!showForm);
   };
 
   useEffect(() => {
@@ -38,7 +47,7 @@ function UserDetailsPage() {
           >
             Back
           </Button>
-          {user.image == null || user.image == "" ? (
+          {user.image == "" ? (
             // If the user doesn't have image
             <Image
               width={200}
@@ -56,9 +65,17 @@ function UserDetailsPage() {
           )}
           <h2>{user.name}</h2>
           <p>{user.email}</p>
-          <Link to={"/"}>
-            <Button>Edit Information</Button>
-          </Link>
+
+          {isLoggedIn && (
+            <>
+              {showForm && (
+                <EditUser refreshUser={getUser} hideForm={toggleShowFrom} />
+              )}
+              <Button onClick={toggleShowFrom}>
+                {showForm ? "Hide From" : "Edit Information"}
+              </Button>
+            </>
+          )}
         </>
       )}
     </div>
