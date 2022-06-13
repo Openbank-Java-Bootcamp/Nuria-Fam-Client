@@ -1,17 +1,24 @@
 import { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import { List, Button } from "antd";
+import { AuthContext } from "../context/auth.context";
 import RestaurantCard from "../components/RestaurantCard";
+import AddRestaurant from "../components/AddRestaurant";
 
 const API_URL = "http://localhost:5005";
 
-function RestaurantListPage() {
+function RestaurantOwnerListPage() {
+  const { user } = useContext(AuthContext);
+
   const [restaurants, setRestaurants] = useState([]);
   const [showForm, setForm] = useState(false);
 
   const getAllRestaurants = () => {
+    const storedToken = localStorage.getItem("authToken");
     axios
-      .get(`${API_URL}/api/restaurants`)
+      .get(`${API_URL}/api/restaurants/userid/${user.id}`, {
+        headers: { Authorization: `Bearer ${storedToken}` },
+      })
       .then((response) => setRestaurants(response.data))
       .catch((error) => console.log(error));
   };
@@ -26,6 +33,16 @@ function RestaurantListPage() {
 
   return (
     <div>
+      <h2>Your restaurants</h2>
+      {showForm && (
+        <AddRestaurant
+          refreshRestaurants={getAllRestaurants}
+          hideForm={toggleShowFrom}
+        />
+      )}
+      <Button onClick={toggleShowFrom}>
+        {showForm ? "Hide From" : "Add Restaurant"}
+      </Button>
       <List
         grid={{
           gutter: 16,
@@ -41,4 +58,4 @@ function RestaurantListPage() {
     </div>
   );
 }
-export default RestaurantListPage;
+export default RestaurantOwnerListPage;

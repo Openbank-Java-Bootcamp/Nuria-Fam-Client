@@ -4,7 +4,6 @@ import HomePage from "./pages/HomePage";
 import SignupPage from "./pages/SignupPage";
 import LoginPage from "./pages/LoginPage";
 import Navbar from "./components/Navbar";
-import IsPrivate from "./components/IsPrivate";
 import IsAnon from "./components/IsAnon";
 import RestaurantListPage from "./pages/RestaurantListPage";
 import RestaurantDetailsPage from "./pages/RestaurantDetailsPage";

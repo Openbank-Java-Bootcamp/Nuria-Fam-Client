@@ -1,11 +1,11 @@
 import { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
-import { Image, Button, Card } from "antd";
+import { Image, Button, Card, Rate } from "antd";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../context/auth.context";
 import EditRestaurant from "../components/EditRestaurant";
-import IsOwner from "../components/IsOwner";
+import IsUser from "../components/IsUser";
 
 const API_URL = "http://localhost:5005";
 
@@ -29,6 +29,10 @@ function RestaurantDetailsPage() {
 
   const toggleShowFrom = () => {
     setForm(!showForm);
+  };
+
+  const handleRate = () => {
+    e.preventDefault();
   };
 
   useEffect(() => {
@@ -55,12 +59,29 @@ function RestaurantDetailsPage() {
           />
 
           <h2>{restaurant.name}</h2>
+          <Rate allowHalf disabled defaultValue={2} />
           <p>{restaurant.phone}</p>
           <p>
             {restaurant.address.street}, {restaurant.address.number}
             <br />
             {restaurant.address.city}, {restaurant.address.country}
           </p>
+
+          {isLoggedIn && (
+            <>
+              <IsUser>
+                <label>Rate:</label>
+                <select onChange={handleRate}>
+                  <option value="">Rate the restaurant</option>
+                  <option value="1">1</option>
+                  <option value="2">2</option>
+                  <option value="3">3</option>
+                  <option value="4">4</option>
+                  <option value="5">5</option>
+                </select>
+              </IsUser>
+            </>
+          )}
 
           {isLoggedIn && (
             <>
