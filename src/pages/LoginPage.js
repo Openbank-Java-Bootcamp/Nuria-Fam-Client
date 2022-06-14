@@ -52,6 +52,7 @@ function LoginPage(props) {
           rules={[
             {
               required: true,
+              message: "Provide a email",
             },
           ]}
         >
@@ -64,6 +65,7 @@ function LoginPage(props) {
           rules={[
             {
               required: true,
+              message: "Provide a password",
             },
           ]}
         >

@@ -48,6 +48,7 @@ function AddDrinkCategory(props) {
           rules={[
             {
               required: true,
+              message: "Provide a name",
             },
           ]}
         >

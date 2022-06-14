@@ -57,6 +57,7 @@ function AddEmployee(props) {
           rules={[
             {
               required: true,
+              message: "Provide a name",
             },
           ]}
         >
@@ -69,6 +70,7 @@ function AddEmployee(props) {
           rules={[
             {
               required: true,
+              message: "Provide a phone",
             },
           ]}
         >
@@ -81,6 +83,7 @@ function AddEmployee(props) {
           rules={[
             {
               required: true,
+              message: "Provide a job title",
             },
           ]}
         >

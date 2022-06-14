@@ -67,6 +67,7 @@ function AddRestaurant(props) {
           rules={[
             {
               required: true,
+              message: "Provide a name",
             },
           ]}
         >
@@ -79,6 +80,7 @@ function AddRestaurant(props) {
           rules={[
             {
               required: true,
+              message: "Provide a phone",
             },
           ]}
         >
@@ -91,6 +93,7 @@ function AddRestaurant(props) {
           rules={[
             {
               required: true,
+              message: "Provide a street",
             },
           ]}
         >
@@ -103,6 +106,7 @@ function AddRestaurant(props) {
           rules={[
             {
               required: true,
+              message: "Provide a number",
             },
           ]}
         >
@@ -115,6 +119,7 @@ function AddRestaurant(props) {
           rules={[
             {
               required: true,
+              message: "Provide a city",
             },
           ]}
         >
@@ -127,6 +132,7 @@ function AddRestaurant(props) {
           rules={[
             {
               required: true,
+              message: "Provide a country",
             },
           ]}
         >

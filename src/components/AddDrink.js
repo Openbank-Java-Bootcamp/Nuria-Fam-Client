@@ -58,6 +58,7 @@ function AddDrink(props) {
           rules={[
             {
               required: true,
+              message: "Provide a name",
             },
           ]}
         >
@@ -70,6 +71,7 @@ function AddDrink(props) {
           rules={[
             {
               required: true,
+              message: "Provide information",
             },
           ]}
         >
@@ -82,6 +84,7 @@ function AddDrink(props) {
           rules={[
             {
               required: true,
+              message: "Provide a price",
             },
           ]}
         >

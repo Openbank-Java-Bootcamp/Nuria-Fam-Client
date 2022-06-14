@@ -54,6 +54,7 @@ function SignupPage(props) {
           rules={[
             {
               required: true,
+              message: "Provide a email",
             },
           ]}
         >
@@ -66,6 +67,7 @@ function SignupPage(props) {
           rules={[
             {
               required: true,
+              message: "Provide a password",
             },
           ]}
         >
@@ -78,6 +80,7 @@ function SignupPage(props) {
           rules={[
             {
               required: true,
+              message: "Provide a name",
             },
           ]}
         >
@@ -90,6 +93,7 @@ function SignupPage(props) {
           rules={[
             {
               required: true,
+              message: "Provide a role",
             },
           ]}
         >
