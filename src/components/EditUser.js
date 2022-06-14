@@ -2,20 +2,23 @@ import { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import { useParams, useNavigate } from "react-router-dom";
 import { AuthContext } from "../context/auth.context";
+import { Button, Form, Typography } from "antd";
+const { Title, Text } = Typography;
 
 const API_URL = "http://localhost:5005";
 
 function EditUser(props) {
+  const { logOutUser, user } = useContext(AuthContext);
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [name, setName] = useState("");
   const [image, setImage] = useState("");
+  const [role, setRole] = useState(user.role);
 
   const [errorMessage, setErrorMessage] = useState(undefined);
 
   const { userId } = useParams();
-
-  const { logOutUser } = useContext(AuthContext);
 
   const navigate = useNavigate();
 
@@ -42,8 +45,8 @@ function EditUser(props) {
   }, [userId]);
 
   const handleSubmit = (e) => {
-    e.preventDefault();
-    const requestBody = { email, password, name, image };
+    // e.preventDefault();
+    const requestBody = { email, password, name, image, role };
 
     axios
       .put(`${API_URL}/auth/users/${userId}`, requestBody, {
@@ -76,33 +79,60 @@ function EditUser(props) {
   };
 
   return (
-    <div>
-      <h3>Edit User</h3>
+    <div className="EditUser">
+      <Title level={5}>Edit User</Title>
 
-      <form onSubmit={handleSubmit}>
-        <label>Email:</label>
-        <input type="email" name="email" value={email} onChange={handleEmail} />
+      <Form layout="vertical" onFinish={handleSubmit}>
+        <Form.Item label="Email">
+          <input
+            className="ant-input"
+            type="email"
+            name="email"
+            value={email}
+            onChange={handleEmail}
+          />
+        </Form.Item>
 
-        <label>Password:</label>
-        <input
-          type="password"
-          name="password"
-          value={password}
-          onChange={handlePassword}
-        />
+        <Form.Item label="Password">
+          <input
+            className="ant-input"
+            type="password"
+            name="password"
+            value={password}
+            onChange={handlePassword}
+          />
+        </Form.Item>
 
-        <label>Name:</label>
-        <input type="text" name="name" value={name} onChange={handleName} />
+        <Form.Item label="Name">
+          <input
+            className="ant-input"
+            type="text"
+            name="name"
+            value={name}
+            onChange={handleName}
+          />
+        </Form.Item>
 
-        <label>Image</label>
-        <input type="text" name="image" value={image} onChange={handleImage} />
+        <Form.Item label="Image">
+          <input
+            className="ant-input"
+            type="text"
+            name="image"
+            value={image}
+            onChange={handleImage}
+          />
+        </Form.Item>
 
-        <button type="submit">Update User</button>
-      </form>
+        <Button type="primary" htmlType="submit">
+          Submit
+        </Button>
+      </Form>
 
-      {errorMessage && <p className="error-message">{errorMessage}</p>}
+      {errorMessage && <Text className="error-message">{errorMessage}</Text>}
 
-      <button onClick={deleteUser}>Delete User</button>
+      <Button type="danger" onClick={deleteUser}>
+        Delete User
+      </Button>
     </div>
   );
 }

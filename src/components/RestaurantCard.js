@@ -8,7 +8,7 @@ function RestaurantCard({ id, image, name }) {
       <Link to={`/restaurants/${id}`}>
         <Card
           hoverable
-          style={{ width: 400 }}
+          style={{ width: 400, height: 300 }}
           cover={<img alt="Restaurant image" src={image} />}
         >
           <Meta title={name} />

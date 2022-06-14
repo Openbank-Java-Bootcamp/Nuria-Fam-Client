@@ -1,6 +1,8 @@
 import { useState, useContext } from "react";
 import axios from "axios";
 import { AuthContext } from "../context/auth.context";
+import { Button, Form, Input, Typography, InputNumber } from "antd";
+const { Title, Text } = Typography;
 
 const API_URL = "http://localhost:5005";
 
@@ -21,7 +23,7 @@ function AddRestaurant(props) {
   const storedToken = localStorage.getItem("authToken");
 
   const handleSubmit = (e) => {
-    e.preventDefault();
+    // e.preventDefault();
     const requestBody = {
       name,
       phone,
@@ -55,70 +57,92 @@ function AddRestaurant(props) {
   };
 
   return (
-    <div>
-      <h3>Add Restaurant</h3>
+    <div className="AddRestaurant">
+      <Title level={5}>Add Restaurant</Title>
 
-      <form onSubmit={handleSubmit}>
-        <label>Name</label>
-        <input
-          type="text"
+      <Form layout="vertical" onFinish={handleSubmit}>
+        <Form.Item
+          label="Name"
           name="name"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-        />
+          rules={[
+            {
+              required: true,
+            },
+          ]}
+        >
+          <Input onChange={(e) => setName(e.target.value)} />
+        </Form.Item>
 
-        <label>Phone</label>
-        <input
-          type="text"
+        <Form.Item
+          label="Phone"
           name="phone"
-          value={phone}
-          onChange={(e) => setPhone(e.target.value)}
-        />
+          rules={[
+            {
+              required: true,
+            },
+          ]}
+        >
+          <Input onChange={(e) => setPhone(e.target.value)} />
+        </Form.Item>
 
-        <label>Street</label>
-        <input
-          type="text"
+        <Form.Item
+          label="Street"
           name="street"
-          value={street}
-          onChange={(e) => setStreet(e.target.value)}
-        />
+          rules={[
+            {
+              required: true,
+            },
+          ]}
+        >
+          <Input onChange={(e) => setStreet(e.target.value)} />
+        </Form.Item>
 
-        <label>Number</label>
-        <input
-          type="number"
+        <Form.Item
+          label="Number"
           name="number"
-          value={number}
-          onChange={(e) => setNumber(e.target.value)}
-        />
+          rules={[
+            {
+              required: true,
+            },
+          ]}
+        >
+          <InputNumber onChange={(value) => setNumber(value)} />
+        </Form.Item>
 
-        <label>City</label>
-        <input
-          type="text"
+        <Form.Item
+          label="City"
           name="city"
-          value={city}
-          onChange={(e) => setCity(e.target.value)}
-        />
+          rules={[
+            {
+              required: true,
+            },
+          ]}
+        >
+          <Input onChange={(e) => setCity(e.target.value)} />
+        </Form.Item>
 
-        <label>Country</label>
-        <input
-          type="text"
+        <Form.Item
+          label="Country"
           name="country"
-          value={country}
-          onChange={(e) => setCountry(e.target.value)}
-        />
+          rules={[
+            {
+              required: true,
+            },
+          ]}
+        >
+          <Input onChange={(e) => setCountry(e.target.value)} />
+        </Form.Item>
 
-        <label>Image</label>
-        <input
-          type="text"
-          name="image"
-          value={image}
-          onChange={(e) => setImage(e.target.value)}
-        />
+        <Form.Item label="Image" name="image">
+          <Input onChange={(e) => setImage(e.target.value)} />
+        </Form.Item>
 
-        <button type="submit">Submit</button>
-      </form>
+        <Button type="primary" htmlType="submit">
+          Submit
+        </Button>
+      </Form>
 
-      {errorMessage && <p className="error-message">{errorMessage}</p>}
+      {errorMessage && <Text className="error-message">{errorMessage}</Text>}
     </div>
   );
 }

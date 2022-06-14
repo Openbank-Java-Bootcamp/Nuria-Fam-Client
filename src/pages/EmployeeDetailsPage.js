@@ -1,9 +1,10 @@
 import { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
-import { Image, Button } from "antd";
 import { AuthContext } from "../context/auth.context";
 import EditEmployee from "../components/EditEmployee";
+import { Image, Button, Typography } from "antd";
+const { Title, Text } = Typography;
 
 const API_URL = "http://localhost:5005";
 
@@ -37,7 +38,7 @@ function EmployeeDetailsPage() {
   }, []);
 
   return (
-    <div>
+    <div className="EmployeeDetails">
       {employee && (
         <>
           <Button
@@ -53,9 +54,9 @@ function EmployeeDetailsPage() {
             height={300}
             src={employee.image}
           />
-          <h2>{employee.name}</h2>
-          <p>{employee.phone}</p>
-          <p>{employee.jobTitle}</p>
+          <Title level={2}>{employee.name}</Title>
+          <Text className="info">{employee.phone}</Text>
+          <Text className="info">{employee.jobTitle}</Text>
 
           {isLoggedIn && (
             <>

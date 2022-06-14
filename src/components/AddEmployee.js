@@ -1,6 +1,8 @@
 import { useState } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
+import { Button, Form, Input, Typography } from "antd";
+const { Title, Text } = Typography;
 
 const API_URL = "http://localhost:5005";
 
@@ -17,7 +19,7 @@ function AddEmployee(props) {
   const storedToken = localStorage.getItem("authToken");
 
   const handleSubmit = (e) => {
-    e.preventDefault();
+    // e.preventDefault();
     const requestBody = {
       name,
       phone,
@@ -45,45 +47,56 @@ function AddEmployee(props) {
   };
 
   return (
-    <div>
-      <h3>Add Employee</h3>
+    <div className="AddEmployee">
+      <Title level={5}>Add Employee</Title>
 
-      <form onSubmit={handleSubmit}>
-        <label>Name</label>
-        <input
-          type="text"
+      <Form layout="vertical" onFinish={handleSubmit}>
+        <Form.Item
+          label="Name"
           name="name"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-        />
+          rules={[
+            {
+              required: true,
+            },
+          ]}
+        >
+          <Input onChange={(e) => setName(e.target.value)} />
+        </Form.Item>
 
-        <label>Phone</label>
-        <input
-          type="text"
+        <Form.Item
+          label="Phone"
           name="phone"
-          value={phone}
-          onChange={(e) => setPhone(e.target.value)}
-        />
+          rules={[
+            {
+              required: true,
+            },
+          ]}
+        >
+          <Input onChange={(e) => setPhone(e.target.value)} />
+        </Form.Item>
 
-        <label>Jot Title</label>
-        <input
-          type="text"
+        <Form.Item
+          label="Job Title"
           name="jobTitle"
-          value={jobTitle}
-          onChange={(e) => setJobTitle(e.target.value)}
-        />
-        <label>Image</label>
-        <input
-          type="text"
-          name="image"
-          value={image}
-          onChange={(e) => setImage(e.target.value)}
-        />
+          rules={[
+            {
+              required: true,
+            },
+          ]}
+        >
+          <Input onChange={(e) => setJobTitle(e.target.value)} />
+        </Form.Item>
 
-        <button type="submit">Submit</button>
-      </form>
+        <Form.Item label="Image" name="image">
+          <Input onChange={(e) => setImage(e.target.value)} />
+        </Form.Item>
 
-      {errorMessage && <p className="error-message">{errorMessage}</p>}
+        <Button type="primary" htmlType="submit">
+          Submit
+        </Button>
+      </Form>
+
+      {errorMessage && <Text className="error-message">{errorMessage}</Text>}
     </div>
   );
 }

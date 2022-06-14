@@ -41,7 +41,7 @@ function RestaurantListPage() {
   }, []);
 
   return (
-    <div>
+    <div className="RestaurantList">
       <Search
         placeholder="Search a restaurant"
         onChange={handleSearch}

@@ -1,9 +1,10 @@
 import { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
-import { Image, Button } from "antd";
 import { AuthContext } from "../context/auth.context";
 import EditUser from "../components/EditUser";
+import { Image, Button, Typography } from "antd";
+const { Title, Text } = Typography;
 
 const API_URL = "http://localhost:5005";
 
@@ -39,7 +40,7 @@ function UserDetailsPage() {
   }, []);
 
   return (
-    <div>
+    <div className="UserDetails">
       {user1 && (
         <>
           <Button
@@ -65,9 +66,9 @@ function UserDetailsPage() {
               src={user.image}
             />
           )}
-          <h2>{user1.name}</h2>
-          <p>{user1.email}</p>
-          <p>{user.role}</p>
+          <Title level={2}>{user1.name}</Title>
+          <Text className="info">{user1.email}</Text>
+          <Text className="info">{user.role}</Text>
 
           {isLoggedIn && (
             <>

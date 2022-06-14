@@ -4,14 +4,16 @@ import RestaurantListPage from "./RestaurantListPage";
 import RestaurantOwnerListPage from "./RestaurantOwnerList";
 import IsOwner from "../components/IsOwner";
 import IsUser from "../components/IsUser";
+import { Typography } from "antd";
+const { Title } = Typography;
 
 function HomePage() {
   const { isLoggedIn, user } = useContext(AuthContext);
   return (
-    <div>
+    <div className="HomePage">
       {isLoggedIn && (
         <>
-          <h2>Welcome {user && user.name}!</h2>
+          <Title level={2}>Welcome {user && user.name}!</Title>
           <IsOwner>
             <RestaurantOwnerListPage />
           </IsOwner>

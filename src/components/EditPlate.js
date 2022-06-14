@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { useParams, useNavigate } from "react-router-dom";
+import { Button, Form, Typography } from "antd";
+const { Title, Text } = Typography;
 
 const API_URL = "http://localhost:5005";
 
@@ -34,7 +36,7 @@ function EditPlate(props) {
   }, [plateId]);
 
   const handleSubmit = (e) => {
-    e.preventDefault();
+    // e.preventDefault();
     const requestBody = {
       name,
       ingredients,
@@ -73,47 +75,59 @@ function EditPlate(props) {
   };
 
   return (
-    <div>
-      <h3>Edit Plate</h3>
+    <div className="EditPlate">
+      <Title level={5}>Edit Plate</Title>
 
-      <form onSubmit={handleSubmit}>
-        <label>Name</label>
-        <input
-          type="text"
-          name="name"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-        />
+      <Form layout="vertical" onFinish={handleSubmit}>
+        <Form.Item label="Name">
+          <input
+            className="ant-input"
+            type="text"
+            name="name"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+          />
+        </Form.Item>
 
-        <label>Ingredients</label>
-        <textarea
-          name="ingredients"
-          value={ingredients}
-          onChange={(e) => setIngredients(e.target.value)}
-        />
+        <Form.Item label="Ingredients">
+          <textarea
+            className="ant-input"
+            name="ingredients"
+            value={ingredients}
+            onChange={(e) => setIngredients(e.target.value)}
+          />
+        </Form.Item>
 
-        <label>Price</label>
-        <input
-          type="number"
-          name="price"
-          value={price}
-          onChange={(e) => setPrice(e.target.value)}
-        />
+        <Form.Item label="Price">
+          <input
+            className="ant-input"
+            type="number"
+            name="price"
+            value={price}
+            onChange={(e) => setPrice(e.target.value)}
+          />
+        </Form.Item>
 
-        <label>Image</label>
-        <input
-          type="text"
-          name="image"
-          value={image}
-          onChange={(e) => setImage(e.target.value)}
-        />
+        <Form.Item label="Image">
+          <input
+            className="ant-input"
+            type="text"
+            name="image"
+            value={image}
+            onChange={(e) => setImage(e.target.value)}
+          />
+        </Form.Item>
 
-        <button type="submit">Update Plate</button>
-      </form>
+        <Button type="primary" htmlType="submit">
+          Submit
+        </Button>
+      </Form>
 
-      {errorMessage && <p className="error-message">{errorMessage}</p>}
+      {errorMessage && <Text className="error-message">{errorMessage}</Text>}
 
-      <button onClick={deletePlate}>Delete Plate</button>
+      <Button type="danger" onClick={deletePlate}>
+        Delete Restaurant
+      </Button>
     </div>
   );
 }

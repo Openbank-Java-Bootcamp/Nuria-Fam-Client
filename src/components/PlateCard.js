@@ -9,7 +9,7 @@ function PlateCard(props) {
       <Link to={`/plates/${plateCategoryId}/${plate.id}`}>
         <Card
           hoverable
-          style={{ width: 400 }}
+          style={{ width: 300, height: 300 }}
           cover={<img alt="Plate image" src={plate.image} />}
         >
           <Meta title={plate.name} description={plate.ingredients} />

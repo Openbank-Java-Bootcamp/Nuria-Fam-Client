@@ -34,7 +34,7 @@ function PlateCategoryListPage() {
   }, []);
 
   return (
-    <div>
+    <div className="PlateCategoryList">
       <Button
         onClick={() => {
           navigate(-1);

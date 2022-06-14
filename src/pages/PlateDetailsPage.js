@@ -1,10 +1,11 @@
 import { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
-import { Image, Button } from "antd";
 import { AuthContext } from "../context/auth.context";
 import EditPlate from "../components/EditPlate";
 import IsOwner from "../components/IsOwner";
+import { Image, Button, Typography } from "antd";
+const { Title, Text } = Typography;
 
 const API_URL = "http://localhost:5005";
 
@@ -35,7 +36,7 @@ function PlateDetailsPage() {
   }, []);
 
   return (
-    <div>
+    <div className="PlateDetails">
       {plate && (
         <>
           <Button
@@ -51,9 +52,9 @@ function PlateDetailsPage() {
             height={300}
             src={plate.image}
           />
-          <h2>{plate.name}</h2>
-          <p>{plate.ingredients}</p>
-          <p>{plate.price} €</p>
+          <Title level={2}>{plate.name}</Title>
+          <Text className="info">{plate.ingredients}</Text>
+          <Text className="info">{plate.price} €</Text>
 
           {isLoggedIn && (
             <>

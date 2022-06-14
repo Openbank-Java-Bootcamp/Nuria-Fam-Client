@@ -34,7 +34,7 @@ function DrinkCategoryListPage() {
   }, []);
 
   return (
-    <div>
+    <div className="DrinkCategoryList">
       <Button
         onClick={() => {
           navigate(-1);

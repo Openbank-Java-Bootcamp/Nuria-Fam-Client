@@ -1,5 +1,5 @@
 import { Route, Routes } from "react-router-dom";
-// import "./App.css";
+import "./App.css";
 import HomePage from "./pages/HomePage";
 import SignupPage from "./pages/SignupPage";
 import LoginPage from "./pages/LoginPage";
@@ -19,7 +19,7 @@ import UserDetailsPage from "./pages/UserDetailsPage";
 
 import { Layout } from "antd";
 import IsPrivate from "./components/IsPrivate";
-const { Header, Footer, Sider, Content } = Layout;
+const { Header, Content } = Layout;
 
 function App() {
   return (

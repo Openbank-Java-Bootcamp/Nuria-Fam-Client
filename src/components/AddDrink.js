@@ -1,6 +1,9 @@
 import { useState } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
+import { Button, Form, Input, Typography, InputNumber } from "antd";
+const { Title, Text } = Typography;
+const { TextArea } = Input;
 
 const API_URL = "http://localhost:5005";
 
@@ -17,7 +20,7 @@ function AddDrink(props) {
   const storedToken = localStorage.getItem("authToken");
 
   const handleSubmit = (e) => {
-    e.preventDefault();
+    // e.preventDefault();
     const requestBody = {
       name,
       information,
@@ -45,45 +48,56 @@ function AddDrink(props) {
   };
 
   return (
-    <div>
-      <h3>Add Drink</h3>
+    <div className="AddDrink">
+      <Title level={5}>Add Drink</Title>
 
-      <form onSubmit={handleSubmit}>
-        <label>Name</label>
-        <input
-          type="text"
+      <Form layout="vertical" onFinish={handleSubmit}>
+        <Form.Item
+          label="Name"
           name="name"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-        />
+          rules={[
+            {
+              required: true,
+            },
+          ]}
+        >
+          <Input onChange={(e) => setName(e.target.value)} />
+        </Form.Item>
 
-        <label>Information</label>
-        <textarea
+        <Form.Item
+          label="Information"
           name="information"
-          value={information}
-          onChange={(e) => setInformation(e.target.value)}
-        />
+          rules={[
+            {
+              required: true,
+            },
+          ]}
+        >
+          <TextArea onChange={(e) => setInformation(e.target.value)} />
+        </Form.Item>
 
-        <label>Price</label>
-        <input
-          type="number"
+        <Form.Item
+          label="Price"
           name="price"
-          value={price}
-          onChange={(e) => setPrice(e.target.value)}
-        />
+          rules={[
+            {
+              required: true,
+            },
+          ]}
+        >
+          <InputNumber onChange={(value) => setPrice(value)} />
+        </Form.Item>
 
-        <label>Image</label>
-        <input
-          type="text"
-          name="image"
-          value={image}
-          onChange={(e) => setImage(e.target.value)}
-        />
+        <Form.Item label="Image" name="image">
+          <Input onChange={(e) => setImage(e.target.value)} />
+        </Form.Item>
 
-        <button type="submit">Submit</button>
-      </form>
+        <Button type="primary" htmlType="submit">
+          Submit
+        </Button>
+      </Form>
 
-      {errorMessage && <p className="error-message">{errorMessage}</p>}
+      {errorMessage && <Text className="error-message">{errorMessage}</Text>}
     </div>
   );
 }

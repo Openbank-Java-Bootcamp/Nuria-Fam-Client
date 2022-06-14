@@ -2,3 +2,115 @@
   margin: 0;
   padding: 0;
 }
+
+/* Cards */
+.cardButton {
+  margin-bottom: 10px;
+}
+
+.DrinkCard .ant-card-cover img {
+  height: 300px;
+  width: auto;
+  margin: auto;
+}
+
+/* Navbar */
+.Navbar {
+  display: flex;
+  justify-content: space-between;
+}
+
+.Navbar button {
+  margin-left: 10px;
+}
+
+/* Lists */
+.RestaurantList,
+.RestaurantOwnerList,
+.PlateCategoryList,
+.PlateList,
+.EmployeeList,
+.DrinkCategoryList,
+.DrinkList {
+  width: 95%;
+  margin: 5px auto;
+}
+
+/* Forms */
+.SignupPage,
+.LoginPage,
+.AddRestaurant,
+.EditRestaurant,
+.AddPlateCategory,
+.AddPlate,
+.EditPlate,
+.AddDrinkCategory,
+.AddDrink,
+.EditDrink,
+.AddEmployee,
+.EditEmployee,
+.EditUser {
+  display: flex;
+  flex-direction: column;
+  width: 400px;
+  height: auto;
+  margin: 20px auto;
+  text-align: center;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+}
+
+form button {
+  border-radius: 3px;
+  height: 30px;
+  width: 20%;
+  text-align: center;
+  margin: 5px auto;
+}
+
+/* Details page */
+.RestaurantDetails,
+.PlateDetails,
+.DrinkDetails,
+.EmployeeDetails,
+.UserDetails {
+  display: flex;
+  flex-direction: column;
+  width: 500px;
+  margin: 20px auto;
+}
+
+.RestaurantDetails button,
+.RestaurantDetails .rate,
+.PlateDetails button,
+.DrinkDetails button,
+.EmployeeDetails button,
+.UserDetails button {
+  border-radius: 3px;
+  height: 30px;
+  width: 40%;
+  text-align: center;
+  margin: 5px auto;
+}
+
+.RestaurantDetails .info,
+.PlateDetails .info,
+.DrinkDetails .info,
+.EmployeeDetails .info,
+.UserDetails .info {
+  margin-bottom: 10px;
+  font-size: 16px;
+}
+
+.RestaurantDetails img,
+.PlateDetails img,
+.DrinkDetails img,
+.EmployeeDetails img,
+.UserDetails img {
+  width: auto;
+  margin: auto;
+}

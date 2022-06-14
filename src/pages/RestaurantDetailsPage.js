@@ -1,12 +1,14 @@
 import { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
-import { Image, Button, Card, Rate } from "antd";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../context/auth.context";
 import EditRestaurant from "../components/EditRestaurant";
 import IsOwner from "../components/IsOwner";
 import IsUser from "../components/IsUser";
+import { Image, Button, Card, Rate, Typography, Select } from "antd";
+const { Title, Text } = Typography;
+const { Option } = Select;
 
 const API_URL = "http://localhost:5005";
 
@@ -20,8 +22,6 @@ function RestaurantDetailsPage() {
   const [ratingsList, setRatingsList] = useState([]);
   const [rating, setRatingUser] = useState(0);
   const [totalRating, setTotalRating] = useState(0);
-
-  const [errorMessage, setErrorMessage] = useState(undefined);
 
   const navigate = useNavigate();
 
@@ -50,8 +50,8 @@ function RestaurantDetailsPage() {
     setForm(!showForm);
   };
 
-  const handleSubmitRate = (e) => {
-    e.preventDefault();
+  const handleSubmitRate = () => {
+    // e.preventDefault();
 
     const requestBody = {
       rating,
@@ -67,10 +67,6 @@ function RestaurantDetailsPage() {
         ratingAvg();
         getRestaurant();
         getRatings();
-      })
-      .catch((error) => {
-        const errorDescription = error.response.data.errors[0].defaultMessage;
-        setErrorMessage(errorDescription);
       });
   };
 
@@ -90,52 +86,49 @@ function RestaurantDetailsPage() {
   }, []);
 
   return (
-    <div>
+    <div className="RestaurantDetails">
       {restaurant && (
         <>
-          <Button
-            onClick={() => {
-              navigate(-1);
-            }}
-          >
-            Back
-          </Button>
-
           <Image
             alt="Restaurant image"
             preview={false}
             height={300}
             src={restaurant.image}
           />
+          <Title level={2}>{restaurant.name}</Title>
 
-          <h2>{restaurant.name}</h2>
           <Rate allowHalf disabled value={totalRating} />
 
-          <p>{restaurant.phone}</p>
-          <p>
+          <Text className="info">{restaurant.phone}</Text>
+          <Text className="info">
             {restaurant.address.street}, {restaurant.address.number}
             <br />
             {restaurant.address.city}, {restaurant.address.country}
-          </p>
+          </Text>
 
           {isLoggedIn && (
             <>
               <IsUser>
                 <label>Rate:</label>
-                <select onChange={(e) => setRatingUser(e.target.value)}>
-                  <option value="">Rate restaurant</option>
-                  <option value="1">1</option>
-                  <option value="2">2</option>
-                  <option value="3">3</option>
-                  <option value="4">4</option>
-                  <option value="5">5</option>
-                </select>
-                <button type="submit" onClick={handleSubmitRate}>
-                  Rate
-                </button>
-                {errorMessage && (
-                  <p className="error-message">{errorMessage}</p>
-                )}
+                <Select
+                  className="rate"
+                  placeholder="Rate"
+                  onChange={(value) => setRatingUser(value)}
+                >
+                  <Option value="1">1</Option>
+                  <Option value="2">2</Option>
+                  <Option value="3">3</Option>
+                  <Option value="4">4</Option>
+                  <Option value="5">5</Option>
+                </Select>
+
+                <Button
+                  type="primary"
+                  htmlType="submit"
+                  onClick={handleSubmitRate}
+                >
+                  Submit
+                </Button>
               </IsUser>
             </>
           )}
@@ -156,22 +149,22 @@ function RestaurantDetailsPage() {
             </>
           )}
 
-          <Link to={`/${restaurantId}/platecategory`}>
-            <Card>
-              <p>Plates</p>
+          <Link className="cardButton" to={`/${restaurantId}/platecategory`}>
+            <Card hoverable>
+              <Text strong>Plates</Text>
             </Card>
           </Link>
 
-          <Link to={`/${restaurantId}/drinkcategory`}>
-            <Card>
-              <p>Drinks</p>
+          <Link className="cardButton" to={`/${restaurantId}/drinkcategory`}>
+            <Card hoverable>
+              <Text strong>Drinks</Text>
             </Card>
           </Link>
           {isLoggedIn && (
             <IsOwner>
               <Link to={`/${restaurantId}/employees`}>
-                <Card>
-                  <p>Employees</p>
+                <Card hoverable>
+                  <Text strong>Employees</Text>
                 </Card>
               </Link>
             </IsOwner>

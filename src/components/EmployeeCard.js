@@ -9,7 +9,7 @@ function EmployeeCard(props) {
       <Link to={`/${restaurantId}/employees/${employee.id}`}>
         <Card
           hoverable
-          style={{ width: 400 }}
+          style={{ width: 300, height: 300 }}
           cover={<img alt="Employee image" src={employee.image} />}
         >
           <Meta title={employee.name} description={employee.jobTitle} />

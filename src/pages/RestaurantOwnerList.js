@@ -1,9 +1,10 @@
 import { useState, useEffect, useContext } from "react";
 import axios from "axios";
-import { List, Button } from "antd";
 import { AuthContext } from "../context/auth.context";
 import RestaurantCard from "../components/RestaurantCard";
 import AddRestaurant from "../components/AddRestaurant";
+import { List, Button, Typography } from "antd";
+const { Title } = Typography;
 
 const API_URL = "http://localhost:5005";
 
@@ -32,8 +33,8 @@ function RestaurantOwnerListPage() {
   }, []);
 
   return (
-    <div>
-      <h2>Your restaurants</h2>
+    <div className="RestaurantOwnerList">
+      <Title level={3}>Your restaurants</Title>
       {showForm && (
         <AddRestaurant
           refreshRestaurants={getAllRestaurants}

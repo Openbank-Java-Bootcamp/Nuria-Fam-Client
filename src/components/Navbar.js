@@ -8,36 +8,45 @@ function Navbar() {
   const { isLoggedIn, user, logOutUser } = useContext(AuthContext);
   return (
     <nav className="Navbar">
-      {isLoggedIn && (
-        <Link to={`/users/${user.id}`}>
-          <Avatar
-            alt="User image"
-            size={50}
-            icon={<UserOutlined />}
-            src={user.image}
-          />
+      <div>
+        {isLoggedIn && (
+          <Link to={`/users/${user.id}`}>
+            <Avatar
+              alt="User image"
+              size={45}
+              icon={<UserOutlined />}
+              src={user.image}
+            />
+          </Link>
+        )}
+        <Link to="/">
+          <Button className="home" type="link">
+            Home
+          </Button>
         </Link>
-      )}
-      <Link to="/">
-        <Button type="link">Home</Button>
-      </Link>
+      </div>
 
-      {isLoggedIn && (
-        <Button ghost onClick={logOutUser}>
-          Logout
-        </Button>
-      )}
-
-      {!isLoggedIn && (
-        <>
-          <Link to="/signup">
-            <Button type="primary">Sign Up</Button>
-          </Link>
-          <Link to="/login">
-            <Button>Login</Button>
-          </Link>
-        </>
-      )}
+      <div>
+        {isLoggedIn && (
+          <Button className="logout" ghost onClick={logOutUser}>
+            Logout
+          </Button>
+        )}
+        {!isLoggedIn && (
+          <>
+            <Link to="/signup">
+              <Button type="primary" className="signup">
+                Sign Up
+              </Button>
+            </Link>
+            <Link to="/login">
+              <Button ghost className="login">
+                Login
+              </Button>
+            </Link>
+          </>
+        )}
+      </div>
     </nav>
   );
 }

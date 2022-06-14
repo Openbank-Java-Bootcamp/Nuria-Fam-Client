@@ -35,7 +35,7 @@ function PlateListPage() {
   }, []);
 
   return (
-    <div>
+    <div className="PlateList">
       <Button
         onClick={() => {
           navigate(-1);

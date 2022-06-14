@@ -1,16 +1,18 @@
 import { Link } from "react-router-dom";
-import { Card } from "antd";
+import { Card, Typography } from "antd";
+const { Text } = Typography;
 
 function PlateCategoryCard({ id, name }) {
   return (
     <div>
-      <Link to={`/plates/category/${id}/${name}`}>
+      <Link className="cardButton" to={`/plates/category/${id}/${name}`}>
         <Card
+          hoverable
           style={{
-            width: 400,
+            width: 200,
           }}
         >
-          <p>{name}</p>
+          <Text strong>{name}</Text>
         </Card>
       </Link>
     </div>

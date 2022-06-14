@@ -4,6 +4,8 @@ import { useContext, useState } from "react";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../context/auth.context";
+import { Button, Form, Input, Typography } from "antd";
+const { Title, Text } = Typography;
 
 const API_URL = "http://localhost:5005";
 
@@ -20,7 +22,7 @@ function LoginPage(props) {
   const handlePassword = (e) => setPassword(e.target.value);
 
   const handleLoginSubmit = (e) => {
-    e.preventDefault();
+    // e.preventDefault();
     const requestBody = { email, password };
 
     axios
@@ -42,26 +44,43 @@ function LoginPage(props) {
 
   return (
     <div className="LoginPage">
-      <h1>Login</h1>
+      <Title level={2}>Login</Title>
+      <Form layout="vertical" onFinish={handleLoginSubmit}>
+        <Form.Item
+          label="Email"
+          name="email"
+          rules={[
+            {
+              required: true,
+            },
+          ]}
+        >
+          <Input onChange={handleEmail} />
+        </Form.Item>
 
-      <form onSubmit={handleLoginSubmit}>
-        <label>Email:</label>
-        <input type="email" name="email" value={email} onChange={handleEmail} />
-
-        <label>Password:</label>
-        <input
-          type="password"
+        <Form.Item
+          label="Password"
           name="password"
-          value={password}
-          onChange={handlePassword}
-        />
+          rules={[
+            {
+              required: true,
+            },
+          ]}
+        >
+          <Input.Password onChange={handlePassword} />
+        </Form.Item>
 
-        <button type="submit">Login</button>
-      </form>
-      {errorMessage && <p className="error-message">{errorMessage}</p>}
+        <Button type="primary" htmlType="submit">
+          Login
+        </Button>
+      </Form>
 
-      <p>Don't have an account yet?</p>
-      <Link to={"/signup"}> Sign Up</Link>
+      {errorMessage && <Text className="error-message">{errorMessage}</Text>}
+
+      <Text>Don't have an account yet?</Text>
+      <Link to={"/signup"}>
+        <Button type="link">Sign Up</Button>
+      </Link>
     </div>
   );
 }

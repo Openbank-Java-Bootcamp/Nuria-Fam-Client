@@ -1,10 +1,11 @@
 import { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
-import { Image, Button } from "antd";
 import { AuthContext } from "../context/auth.context";
 import EditDrink from "../components/EditDrink";
 import IsOwner from "../components/IsOwner";
+import { Image, Button, Typography } from "antd";
+const { Title, Text } = Typography;
 
 const API_URL = "http://localhost:5005";
 
@@ -35,7 +36,7 @@ function DrinkDetailsPage() {
   }, []);
 
   return (
-    <div>
+    <div className="DrinkDetails">
       {drink && (
         <>
           <Button
@@ -51,9 +52,9 @@ function DrinkDetailsPage() {
             height={300}
             src={drink.image}
           />
-          <h2>{drink.name}</h2>
-          <p>{drink.information}</p>
-          <p>{drink.price} €</p>
+          <Title level={2}>{drink.name}</Title>
+          <Text className="info">{drink.information}</Text>
+          <Text className="info">{drink.price} €</Text>
 
           {isLoggedIn && (
             <>

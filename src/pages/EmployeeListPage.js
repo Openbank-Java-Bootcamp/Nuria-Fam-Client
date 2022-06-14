@@ -37,7 +37,7 @@ function EmployeeListPage() {
   }, []);
 
   return (
-    <div>
+    <div className="EmployeeList">
       <Button
         onClick={() => {
           navigate(-1);

@@ -3,6 +3,9 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
+import { Button, Form, Input, Select, Typography } from "antd";
+const { Option } = Select;
+const { Title, Text } = Typography;
 
 const API_URL = "http://localhost:5005";
 
@@ -19,10 +22,10 @@ function SignupPage(props) {
   const handleEmail = (e) => setEmail(e.target.value);
   const handlePassword = (e) => setPassword(e.target.value);
   const handleName = (e) => setName(e.target.value);
-  const handleRole = (e) => setRole(e.target.value);
+  const handleRole = (value) => setRole(value);
 
   const handleSignupSubmit = (e) => {
-    e.preventDefault();
+    // e.preventDefault();
     // Create an object representing the request body
     const requestBody = { email, password, name, image, role };
 
@@ -42,37 +45,77 @@ function SignupPage(props) {
 
   return (
     <div className="SignupPage">
-      <h1>Sign Up</h1>
+      <Title level={2}>Sign up</Title>
 
-      <form onSubmit={handleSignupSubmit}>
-        <label>Email:</label>
-        <input type="email" name="email" value={email} onChange={handleEmail} />
+      <Form layout="vertical" onFinish={handleSignupSubmit}>
+        <Form.Item
+          label="Email"
+          name="email"
+          rules={[
+            {
+              required: true,
+            },
+          ]}
+        >
+          <Input onChange={handleEmail} />
+        </Form.Item>
 
-        <label>Password:</label>
-        <input
-          type="password"
+        <Form.Item
+          label="Password"
           name="password"
-          value={password}
-          onChange={handlePassword}
-        />
+          rules={[
+            {
+              required: true,
+            },
+          ]}
+        >
+          <Input.Password onChange={handlePassword} />
+        </Form.Item>
 
-        <label>Name:</label>
-        <input type="text" name="name" value={name} onChange={handleName} />
+        <Form.Item
+          label="Name"
+          name="name"
+          rules={[
+            {
+              required: true,
+            },
+          ]}
+        >
+          <Input onChange={handleName} />
+        </Form.Item>
 
-        <label>Role:</label>
-        <select onChange={handleRole}>
-          <option value="">Choose role</option>
-          <option value="owner">Owner</option>
-          <option value="user">User</option>
-        </select>
+        <Form.Item
+          label="Role"
+          name="role"
+          rules={[
+            {
+              required: true,
+            },
+          ]}
+        >
+          <Select
+            placeholder="Choose role"
+            style={{
+              width: 120,
+            }}
+            onChange={handleRole}
+          >
+            <Option value="owner">Owner</Option>
+            <Option value="user">User</Option>
+          </Select>
+        </Form.Item>
 
-        <button type="submit">Sign Up</button>
-      </form>
+        <Button type="primary" htmlType="submit">
+          Sign Up
+        </Button>
+      </Form>
 
-      {errorMessage && <p className="error-message">{errorMessage}</p>}
+      {errorMessage && <Text className="error-message">{errorMessage}</Text>}
 
-      <p>Already have account?</p>
-      <Link to={"/login"}> Login</Link>
+      <Text>Already have account?</Text>
+      <Link to={"/login"}>
+        <Button type="link">Login</Button>
+      </Link>
     </div>
   );
 }
