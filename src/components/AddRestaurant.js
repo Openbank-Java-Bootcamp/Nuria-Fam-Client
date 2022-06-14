@@ -13,6 +13,8 @@ function AddRestaurant(props) {
   const [country, setCountry] = useState("");
   const [image, setImage] = useState("");
 
+  const [errorMessage, setErrorMessage] = useState(undefined);
+
   const { user } = useContext(AuthContext);
   const userId = user.id;
 
@@ -46,7 +48,10 @@ function AddRestaurant(props) {
         props.refreshRestaurants();
         props.hideForm();
       })
-      .catch((error) => console.log(error));
+      .catch((error) => {
+        const errorDescription = error.response.data.errors[0].defaultMessage;
+        setErrorMessage(errorDescription);
+      });
   };
 
   return (
@@ -112,6 +117,8 @@ function AddRestaurant(props) {
 
         <button type="submit">Submit</button>
       </form>
+
+      {errorMessage && <p className="error-message">{errorMessage}</p>}
     </div>
   );
 }

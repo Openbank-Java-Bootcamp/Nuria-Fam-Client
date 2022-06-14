@@ -6,6 +6,9 @@ const API_URL = "http://localhost:5005";
 
 function AddDrinkCategory(props) {
   const [name, setName] = useState("");
+
+  const [errorMessage, setErrorMessage] = useState(undefined);
+
   const { restaurantId } = useParams();
 
   const storedToken = localStorage.getItem("authToken");
@@ -26,7 +29,10 @@ function AddDrinkCategory(props) {
         props.refreshCategories();
         props.hideForm();
       })
-      .catch((error) => console.log(error));
+      .catch((error) => {
+        const errorDescription = error.response.data.errors[0].defaultMessage;
+        setErrorMessage(errorDescription);
+      });
   };
 
   return (
@@ -44,6 +50,8 @@ function AddDrinkCategory(props) {
 
         <button type="submit">Submit</button>
       </form>
+
+      {errorMessage && <p className="error-message">{errorMessage}</p>}
     </div>
   );
 }

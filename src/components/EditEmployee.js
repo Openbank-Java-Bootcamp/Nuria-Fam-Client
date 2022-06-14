@@ -9,6 +9,9 @@ function EditEmployee(props) {
   const [phone, setPhone] = useState("");
   const [jobTitle, setJobTitle] = useState("");
   const [image, setImage] = useState("");
+
+  const [errorMessage, setErrorMessage] = useState(undefined);
+
   const { employeeId, restaurantId } = useParams();
 
   const navigate = useNavigate();
@@ -52,7 +55,10 @@ function EditEmployee(props) {
         props.refreshEmployee();
         props.hideForm();
       })
-      .catch((error) => console.log(error));
+      .catch((error) => {
+        const errorDescription = error.response.data.errors[0].defaultMessage;
+        setErrorMessage(errorDescription);
+      });
   };
 
   const deleteEmployee = () => {
@@ -104,6 +110,9 @@ function EditEmployee(props) {
 
         <button type="submit">Update Employee</button>
       </form>
+
+      {errorMessage && <p className="error-message">{errorMessage}</p>}
+
       <button onClick={deleteEmployee}>Delete Employee</button>
     </div>
   );

@@ -10,6 +10,8 @@ function EditDrink(props) {
   const [price, setPrice] = useState(0);
   const [image, setImage] = useState("");
 
+  const [errorMessage, setErrorMessage] = useState(undefined);
+
   const { drinkCategoryId, drinkId } = useParams();
 
   const navigate = useNavigate();
@@ -53,7 +55,10 @@ function EditDrink(props) {
         props.refreshDrink();
         props.hideForm();
       })
-      .catch((error) => console.log(error));
+      .catch((error) => {
+        const errorDescription = error.response.data.errors[0].defaultMessage;
+        setErrorMessage(errorDescription);
+      });
   };
 
   const deleteDrink = () => {
@@ -105,6 +110,9 @@ function EditDrink(props) {
 
         <button type="submit">Update Drink</button>
       </form>
+
+      {errorMessage && <p className="error-message">{errorMessage}</p>}
+
       <button onClick={deleteDrink}>Delete Drink</button>
     </div>
   );

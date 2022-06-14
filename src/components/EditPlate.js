@@ -10,6 +10,8 @@ function EditPlate(props) {
   const [price, setPrice] = useState(0);
   const [image, setImage] = useState("");
 
+  const [errorMessage, setErrorMessage] = useState(undefined);
+
   const { plateCategoryId, plateId } = useParams();
 
   const navigate = useNavigate();
@@ -53,7 +55,10 @@ function EditPlate(props) {
         props.refreshPlate();
         props.hideForm();
       })
-      .catch((error) => console.log(error));
+      .catch((error) => {
+        const errorDescription = error.response.data.errors[0].defaultMessage;
+        setErrorMessage(errorDescription);
+      });
   };
 
   const deletePlate = () => {
@@ -105,6 +110,9 @@ function EditPlate(props) {
 
         <button type="submit">Update Plate</button>
       </form>
+
+      {errorMessage && <p className="error-message">{errorMessage}</p>}
+
       <button onClick={deletePlate}>Delete Plate</button>
     </div>
   );

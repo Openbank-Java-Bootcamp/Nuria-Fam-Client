@@ -21,6 +21,8 @@ function RestaurantDetailsPage() {
   const [rating, setRatingUser] = useState(0);
   const [totalRating, setTotalRating] = useState(0);
 
+  const [errorMessage, setErrorMessage] = useState(undefined);
+
   const navigate = useNavigate();
 
   const storedToken = localStorage.getItem("authToken");
@@ -65,6 +67,10 @@ function RestaurantDetailsPage() {
         ratingAvg();
         getRestaurant();
         getRatings();
+      })
+      .catch((error) => {
+        const errorDescription = error.response.data.errors[0].defaultMessage;
+        setErrorMessage(errorDescription);
       });
   };
 
@@ -127,6 +133,9 @@ function RestaurantDetailsPage() {
                 <button type="submit" onClick={handleSubmitRate}>
                   Rate
                 </button>
+                {errorMessage && (
+                  <p className="error-message">{errorMessage}</p>
+                )}
               </IsUser>
             </>
           )}

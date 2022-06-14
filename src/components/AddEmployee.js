@@ -9,6 +9,9 @@ function AddEmployee(props) {
   const [phone, setPhone] = useState("");
   const [jobTitle, setJobTitle] = useState("");
   const [image, setImage] = useState("");
+
+  const [errorMessage, setErrorMessage] = useState(undefined);
+
   const { restaurantId } = useParams();
 
   const storedToken = localStorage.getItem("authToken");
@@ -35,7 +38,10 @@ function AddEmployee(props) {
         props.refreshEmployees();
         props.hideForm();
       })
-      .catch((error) => console.log(error));
+      .catch((error) => {
+        const errorDescription = error.response.data.errors[0].defaultMessage;
+        setErrorMessage(errorDescription);
+      });
   };
 
   return (
@@ -76,6 +82,8 @@ function AddEmployee(props) {
 
         <button type="submit">Submit</button>
       </form>
+
+      {errorMessage && <p className="error-message">{errorMessage}</p>}
     </div>
   );
 }

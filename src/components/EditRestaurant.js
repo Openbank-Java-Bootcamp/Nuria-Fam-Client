@@ -14,6 +14,8 @@ function EditRestaurant(props) {
   const [country, setCountry] = useState("");
   const [image, setImage] = useState("");
 
+  const [errorMessage, setErrorMessage] = useState(undefined);
+
   const { restaurantId } = useParams();
 
   const { user } = useContext(AuthContext);
@@ -61,6 +63,10 @@ function EditRestaurant(props) {
       .then((response) => {
         props.refreshRestaurant();
         props.hideForm();
+      })
+      .catch((error) => {
+        const errorDescription = error.response.data.errors[0].defaultMessage;
+        setErrorMessage(errorDescription);
       });
   };
 
@@ -138,6 +144,9 @@ function EditRestaurant(props) {
 
         <button type="submit">Update Restaurant</button>
       </form>
+
+      {errorMessage && <p className="error-message">{errorMessage}</p>}
+
       <button onClick={deleteRestaurant}>Delete Restaurant</button>
     </div>
   );

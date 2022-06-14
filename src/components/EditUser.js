@@ -11,6 +11,8 @@ function EditUser(props) {
   const [name, setName] = useState("");
   const [image, setImage] = useState("");
 
+  const [errorMessage, setErrorMessage] = useState(undefined);
+
   const { userId } = useParams();
 
   const { logOutUser } = useContext(AuthContext);
@@ -55,7 +57,10 @@ function EditUser(props) {
         props.refreshUser();
         props.hideForm();
       })
-      .catch((error) => console.log(error));
+      .catch((error) => {
+        const errorDescription = error.response.data.errors[0].defaultMessage;
+        setErrorMessage(errorDescription);
+      });
   };
 
   const deleteUser = () => {
@@ -94,6 +99,9 @@ function EditUser(props) {
 
         <button type="submit">Update User</button>
       </form>
+
+      {errorMessage && <p className="error-message">{errorMessage}</p>}
+
       <button onClick={deleteUser}>Delete User</button>
     </div>
   );

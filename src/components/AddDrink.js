@@ -10,6 +10,8 @@ function AddDrink(props) {
   const [price, setPrice] = useState(0);
   const [image, setImage] = useState("");
 
+  const [errorMessage, setErrorMessage] = useState(undefined);
+
   const { drinkCategoryId } = useParams();
 
   const storedToken = localStorage.getItem("authToken");
@@ -36,7 +38,10 @@ function AddDrink(props) {
         props.refreshDrinks();
         props.hideForm();
       })
-      .catch((error) => console.log(error));
+      .catch((error) => {
+        const errorDescription = error.response.data.errors[0].defaultMessage;
+        setErrorMessage(errorDescription);
+      });
   };
 
   return (
@@ -77,6 +82,8 @@ function AddDrink(props) {
 
         <button type="submit">Submit</button>
       </form>
+
+      {errorMessage && <p className="error-message">{errorMessage}</p>}
     </div>
   );
 }
