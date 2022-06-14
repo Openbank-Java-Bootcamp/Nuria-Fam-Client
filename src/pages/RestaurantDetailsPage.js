@@ -61,7 +61,7 @@ function RestaurantDetailsPage() {
         headers: { Authorization: `Bearer ${storedToken}` },
       })
       .then((response) => {
-        setRatingUser(0);
+        setRatingUser();
         ratingAvg();
         getRestaurant();
         getRatings();
@@ -78,6 +78,7 @@ function RestaurantDetailsPage() {
   };
 
   useEffect(() => {
+    ratingAvg();
     getRatings();
     getRestaurant();
   }, []);
@@ -102,7 +103,7 @@ function RestaurantDetailsPage() {
           />
 
           <h2>{restaurant.name}</h2>
-          <Rate allowHalf disabled defaultValue={totalRating} />
+          <Rate allowHalf disabled value={totalRating} />
 
           <p>{restaurant.phone}</p>
           <p>
@@ -116,7 +117,7 @@ function RestaurantDetailsPage() {
               <IsUser>
                 <label>Rate:</label>
                 <select onChange={(e) => setRatingUser(e.target.value)}>
-                  <option value="">Rate the restaurant</option>
+                  <option value="">Rate restaurant</option>
                   <option value="1">1</option>
                   <option value="2">2</option>
                   <option value="3">3</option>

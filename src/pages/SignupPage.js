@@ -62,8 +62,8 @@ function SignupPage(props) {
         <label>Role:</label>
         <select onChange={handleRole}>
           <option value="">Choose role</option>
-          <option value="user">User</option>
           <option value="owner">Owner</option>
+          <option value="user">User</option>
         </select>
 
         <button type="submit">Sign Up</button>

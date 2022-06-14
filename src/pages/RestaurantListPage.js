@@ -1,23 +1,39 @@
-import { useState, useEffect, useContext } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
-import { List, Button } from "antd";
+import { List } from "antd";
 import RestaurantCard from "../components/RestaurantCard";
+import { Input } from "antd";
+const { Search } = Input;
 
 const API_URL = "http://localhost:5005";
 
 function RestaurantListPage() {
   const [restaurants, setRestaurants] = useState([]);
-  const [showForm, setForm] = useState(false);
+  const [restaurantData, setRestaurantsData] = useState([]);
+  const [search, setSearch] = useState("");
 
   const getAllRestaurants = () => {
     axios
       .get(`${API_URL}/api/restaurants`)
-      .then((response) => setRestaurants(response.data))
+      .then((response) => {
+        setRestaurants(response.data);
+        setRestaurantsData(response.data);
+      })
       .catch((error) => console.log(error));
   };
 
-  const toggleShowFrom = () => {
-    setForm(!showForm);
+  const handleSearch = (e) => {
+    setSearch(e.target.value);
+    searchRestaurant(e.target.value);
+  };
+
+  const searchRestaurant = (str) => {
+    let filteredList;
+    filteredList = restaurantData.filter((restaurant) => {
+      return restaurant.name.toLowerCase().includes(str);
+    });
+
+    setRestaurants(filteredList);
   };
 
   useEffect(() => {
@@ -26,6 +42,15 @@ function RestaurantListPage() {
 
   return (
     <div>
+      <Search
+        placeholder="Search a restaurant"
+        onChange={handleSearch}
+        style={{
+          width: 200,
+        }}
+        allowClear
+        enterButton
+      />
       <List
         grid={{
           gutter: 16,

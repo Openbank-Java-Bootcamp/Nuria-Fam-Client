@@ -1,5 +1,5 @@
 import { Route, Routes } from "react-router-dom";
-import "./App.css";
+// import "./App.css";
 import HomePage from "./pages/HomePage";
 import SignupPage from "./pages/SignupPage";
 import LoginPage from "./pages/LoginPage";
@@ -18,6 +18,7 @@ import EmployeeListPage from "./pages/EmployeeListPage";
 import UserDetailsPage from "./pages/UserDetailsPage";
 
 import { Layout } from "antd";
+import IsPrivate from "./components/IsPrivate";
 const { Header, Footer, Sider, Content } = Layout;
 
 function App() {
@@ -69,15 +70,30 @@ function App() {
             {/* Routes for employee pages */}
             <Route
               path="/:restaurantId/employees"
-              element={<EmployeeListPage />}
+              element={
+                <IsPrivate>
+                  <EmployeeListPage />
+                </IsPrivate>
+              }
             />
             <Route
               path="/:restaurantId/employees/:employeeId"
-              element={<EmployeeDetailsPage />}
+              element={
+                <IsPrivate>
+                  <EmployeeDetailsPage />
+                </IsPrivate>
+              }
             />
 
             {/* Routes for user pages */}
-            <Route path="/users/:userId" element={<UserDetailsPage />} />
+            <Route
+              path="/users/:userId"
+              element={
+                <IsPrivate>
+                  <UserDetailsPage />
+                </IsPrivate>
+              }
+            />
 
             <Route
               path="/signup"
