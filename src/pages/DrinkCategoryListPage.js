@@ -1,13 +1,13 @@
 import { useState, useEffect, useContext } from "react";
 import axios from "axios";
-import { List, Button, Typography } from "antd";
+import { Tabs, Button } from "antd";
 import { useParams, Link } from "react-router-dom";
 import { AuthContext } from "../context/auth.context";
-import DrinkCategoryCard from "../components/DrinkCategoryCard";
 import AddDrinkCategory from "../components/AddDrinkCategory";
 import IsOwner from "../components/IsOwner";
+import DrinkListPage from "./DrinkListPage";
 
-const { Title } = Typography;
+const { TabPane } = Tabs;
 
 const API_URL = "http://localhost:5005";
 
@@ -39,8 +39,6 @@ function DrinkCategoryListPage() {
         <Button>Plates</Button>
       </Link>
 
-      <Title level={2}>Drinks</Title>
-
       {isLoggedIn && (
         <>
           {/* If the user is a restaurant owner */}
@@ -60,18 +58,13 @@ function DrinkCategoryListPage() {
         </>
       )}
 
-      <List
-        grid={{
-          gutter: 16,
-          column: 4,
-        }}
-        dataSource={categories}
-        renderItem={(category) => (
-          <List.Item>
-            <DrinkCategoryCard key={category.id} {...category} />
-          </List.Item>
-        )}
-      />
+      <Tabs>
+        {categories.map((category) => (
+          <TabPane tab={category.name} key={category.id}>
+            <DrinkListPage {...category} />
+          </TabPane>
+        ))}
+      </Tabs>
     </div>
   );
 }

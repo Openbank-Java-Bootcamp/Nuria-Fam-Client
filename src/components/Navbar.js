@@ -11,6 +11,15 @@ function Navbar() {
   return (
     <nav className="Navbar">
       <div>
+        <Button
+          ghost
+          onClick={() => {
+            navigate(-1);
+          }}
+        >
+          Back
+        </Button>
+
         {isLoggedIn && (
           <Link to={`/users/${user.id}`}>
             <Avatar
@@ -26,17 +35,6 @@ function Navbar() {
             Restaurants
           </Button>
         </Link>
-      </div>
-
-      <div>
-        <Button
-          ghost
-          onClick={() => {
-            navigate(-1);
-          }}
-        >
-          Back
-        </Button>
       </div>
 
       <div>

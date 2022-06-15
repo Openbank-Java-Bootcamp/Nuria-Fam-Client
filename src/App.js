@@ -8,10 +8,8 @@ import IsAnon from "./components/IsAnon";
 import RestaurantListPage from "./pages/RestaurantListPage";
 import RestaurantDetailsPage from "./pages/RestaurantDetailsPage";
 import PlateCategoryListPage from "./pages/PlateCategoryListPage";
-import PlateListPage from "./pages/PlateListPage";
 import PlateDetailsPage from "./pages/PlateDetailsPage";
 import DrinkCategoryListPage from "./pages/DrinkCategoryListPage";
-import DrinkListPage from "./pages/DrinkListPage";
 import DrinkDetailsPage from "./pages/DrinkDetailsPage";
 import EmployeeDetailsPage from "./pages/EmployeeDetailsPage";
 import EmployeeListPage from "./pages/EmployeeListPage";
@@ -45,10 +43,6 @@ function App() {
               element={<PlateCategoryListPage />}
             />
             <Route
-              path="/plates/category/:plateCategoryId/:plateCategoryName"
-              element={<PlateListPage />}
-            />
-            <Route
               path="/plates/:plateCategoryId/:plateId"
               element={<PlateDetailsPage />}
             />
@@ -57,10 +51,6 @@ function App() {
             <Route
               path="/:restaurantId/drinkcategory"
               element={<DrinkCategoryListPage />}
-            />
-            <Route
-              path="/drinks/category/:drinkCategoryId/:drinkCategoryName"
-              element={<DrinkListPage />}
             />
             <Route
               path="/drinks/:drinkCategoryId/:drinkId"

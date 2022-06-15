@@ -6,7 +6,7 @@ function DrinkCard(props) {
   const { drink, drinkCategoryId } = props;
 
   return (
-    <div className="DrinkCard">
+    <div className="DrinkCard cardButton">
       <Link to={`/drinks/${drinkCategoryId}/${drink.id}`}>
         <Card
           hoverable

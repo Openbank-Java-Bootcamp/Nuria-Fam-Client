@@ -1,13 +1,13 @@
 import { useState, useEffect, useContext } from "react";
 import axios from "axios";
-import { List, Button, Typography } from "antd";
-import { Link, useParams } from "react-router-dom";
+import { Tabs, Button } from "antd";
+import { useParams, Link } from "react-router-dom";
 import { AuthContext } from "../context/auth.context";
-import PlateCategoryCard from "../components/PlateCategoryCard";
 import AddPlateCategory from "../components/AddPlateCategory";
 import IsOwner from "../components/IsOwner";
+import PlateListPage from "./PlateListPage";
 
-const { Title } = Typography;
+const { TabPane } = Tabs;
 
 const API_URL = "http://localhost:5005";
 
@@ -39,8 +39,6 @@ function PlateCategoryListPage() {
         <Button>Drinks</Button>
       </Link>
 
-      <Title level={2}>Plates</Title>
-
       {isLoggedIn && (
         <>
           {/* If the user is a restaurant owner */}
@@ -52,7 +50,7 @@ function PlateCategoryListPage() {
               />
             )}
 
-            {/* Show or ide the form */}
+            {/* Show or hide form */}
             <Button onClick={toggleShowFrom}>
               {showForm ? "Hide From" : "Add Category"}
             </Button>
@@ -60,18 +58,13 @@ function PlateCategoryListPage() {
         </>
       )}
 
-      <List
-        grid={{
-          gutter: 16,
-          column: 4,
-        }}
-        dataSource={categories}
-        renderItem={(category) => (
-          <List.Item>
-            <PlateCategoryCard key={category.id} {...category} />
-          </List.Item>
-        )}
-      />
+      <Tabs>
+        {categories.map((category) => (
+          <TabPane tab={category.name} key={category.id}>
+            <PlateListPage {...category} />
+          </TabPane>
+        ))}
+      </Tabs>
     </div>
   );
 }

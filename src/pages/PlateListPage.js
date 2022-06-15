@@ -1,6 +1,5 @@
 import { useState, useEffect, useContext } from "react";
 import axios from "axios";
-import { useParams } from "react-router-dom";
 import { List, Button, Typography } from "antd";
 import { AuthContext } from "../context/auth.context";
 import PlateCard from "../components/PlateCard";
@@ -11,12 +10,14 @@ const { Title } = Typography;
 
 const API_URL = "http://localhost:5005";
 
-function PlateListPage() {
+function PlateListPage({ id, name }) {
   const { isLoggedIn } = useContext(AuthContext);
   const [showForm, setForm] = useState(false);
 
   const [plates, setPlates] = useState([]);
-  const { plateCategoryId, plateCategoryName } = useParams();
+
+  const plateCategoryId = id;
+  const plateCategoryName = name;
 
   const getPlates = () => {
     axios
@@ -45,7 +46,7 @@ function PlateListPage() {
               <AddPlate refreshPlates={getPlates} hideForm={toggleShowFrom} />
             )}
 
-            {/* Show or hide the form */}
+            {/* Show or hide form */}
             <Button onClick={toggleShowFrom}>
               {showForm ? "Hide From" : "Add Plate"}
             </Button>

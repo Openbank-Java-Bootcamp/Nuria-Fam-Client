@@ -1,6 +1,5 @@
 import { useState, useEffect, useContext } from "react";
 import axios from "axios";
-import { useParams } from "react-router-dom";
 import { List, Button, Typography } from "antd";
 import { AuthContext } from "../context/auth.context";
 import DrinkCard from "../components/DrinkCard";
@@ -11,12 +10,14 @@ const { Title } = Typography;
 
 const API_URL = "http://localhost:5005";
 
-function DrinkListPage() {
+function DrinkListPage({ id, name }) {
   const { isLoggedIn } = useContext(AuthContext);
   const [showForm, setForm] = useState(false);
 
   const [drinks, setDrinks] = useState([]);
-  const { drinkCategoryId, drinkCategoryName } = useParams();
+
+  const drinkCategoryId = id;
+  const drinkCategoryName = name;
 
   const getDrinks = () => {
     axios
