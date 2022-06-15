@@ -39,32 +39,32 @@ function PlateCategoryListPage() {
         <Button>Drinks</Button>
       </Link>
 
-      {isLoggedIn && (
-        <>
-          {/* If the user is a restaurant owner */}
-          <IsOwner>
-            {showForm && (
-              <AddPlateCategory
-                refreshCategories={getAllCategories}
-                hideForm={toggleShowFrom}
-              />
-            )}
-
-            {/* Show or hide form */}
-            <Button onClick={toggleShowFrom}>
-              {showForm ? "Hide From" : "Add Category"}
-            </Button>
-          </IsOwner>
-        </>
-      )}
-
-      <Tabs>
-        {categories.map((category) => (
-          <TabPane tab={category.name} key={category.id}>
-            <PlateListPage {...category} />
-          </TabPane>
-        ))}
-      </Tabs>
+      <div className="list">
+        {isLoggedIn && (
+          <>
+            {/* If the user is a restaurant owner */}
+            <IsOwner>
+              {showForm && (
+                <AddPlateCategory
+                  refreshCategories={getAllCategories}
+                  hideForm={toggleShowFrom}
+                />
+              )}
+              {/* Show or hide form */}
+              <Button onClick={toggleShowFrom}>
+                {showForm ? "Hide From" : "Add Category"}
+              </Button>
+            </IsOwner>
+          </>
+        )}
+        <Tabs centered size="large">
+          {categories.map((category) => (
+            <TabPane tab={category.name} key={category.id}>
+              <PlateListPage {...category} />
+            </TabPane>
+          ))}
+        </Tabs>
+      </div>
     </div>
   );
 }

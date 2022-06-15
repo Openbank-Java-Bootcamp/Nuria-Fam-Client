@@ -17,7 +17,7 @@ import UserDetailsPage from "./pages/UserDetailsPage";
 
 import { Layout } from "antd";
 import IsPrivate from "./components/IsPrivate";
-const { Header, Content } = Layout;
+const { Header, Content, Footer } = Layout;
 
 function App() {
   return (
@@ -26,7 +26,7 @@ function App() {
         <Header>
           <Navbar />
         </Header>
-        <Content style={{ backgroundColor: "white" }}>
+        <Content>
           <Routes>
             <Route path="/" element={<HomePage />} />
 
@@ -103,6 +103,7 @@ function App() {
             />
           </Routes>
         </Content>
+        <Footer>Fam</Footer>
       </Layout>
     </div>
   );

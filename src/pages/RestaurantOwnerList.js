@@ -34,7 +34,6 @@ function RestaurantOwnerListPage() {
 
   return (
     <div className="RestaurantOwnerList">
-      <Title level={3}>Your restaurants</Title>
       {showForm && (
         <AddRestaurant
           refreshRestaurants={getAllRestaurants}

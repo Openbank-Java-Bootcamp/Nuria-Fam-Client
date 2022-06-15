@@ -31,7 +31,7 @@ function Navbar() {
           </Link>
         )}
         <Link to="/">
-          <Button className="home" type="link">
+          <Button className="restaurants" type="link">
             Restaurants
           </Button>
         </Link>
@@ -39,21 +39,17 @@ function Navbar() {
 
       <div>
         {isLoggedIn && (
-          <Button className="logout" ghost onClick={logOutUser}>
+          <Button onClick={logOutUser} ghost>
             Logout
           </Button>
         )}
         {!isLoggedIn && (
           <>
             <Link to="/signup">
-              <Button type="primary" className="signup">
-                Sign Up
-              </Button>
+              <Button type="primary">Sign Up</Button>
             </Link>
             <Link to="/login">
-              <Button ghost className="login">
-                Login
-              </Button>
+              <Button>Login</Button>
             </Link>
           </>
         )}

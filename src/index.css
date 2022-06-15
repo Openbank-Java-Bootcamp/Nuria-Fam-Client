@@ -1,6 +1,17 @@
 * {
   margin: 0;
   padding: 0;
+  font-family: "Nanum Gothic", sans-serif;
+}
+
+.ant-layout-content {
+  background: linear-gradient(
+      rgba(255, 255, 255, 0.6),
+      rgba(255, 255, 255, 0.6)
+    ),
+    url("./assets/bg.jpg");
+  background-size: auto;
+  background-repeat: no-repeat;
 }
 
 /* Cards */
@@ -42,6 +53,15 @@
   margin-right: 10px;
 }
 
+.Navbar .restaurants {
+  color: white;
+}
+
+.Navbar .restaurants:hover {
+  color: white;
+  font-size: 18px;
+}
+
 /* Lists */
 .RestaurantList,
 .RestaurantOwnerList,
@@ -52,6 +72,14 @@
 .DrinkList {
   width: 95%;
   margin: 5px auto;
+}
+
+.list {
+  margin-top: 10px;
+  background: rgba(255, 255, 255, 0.795);
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 4px 4px 2px rgba(0, 0, 0, 0.2);
 }
 
 /* Forms */
@@ -70,10 +98,14 @@
 .EditUser {
   display: flex;
   flex-direction: column;
-  width: 400px;
+  width: 500px;
   height: auto;
   margin: 20px auto;
   text-align: center;
+  background: white;
+  padding: 40px;
+  border-radius: 5px;
+  box-shadow: 4px 4px 2px rgba(0, 0, 0, 0.2);
 }
 
 form {
@@ -98,8 +130,12 @@ form button {
 .UserDetails {
   display: flex;
   flex-direction: column;
-  width: 500px;
+  width: 600px;
   margin: 20px auto;
+  background: white;
+  padding: 40px;
+  border-radius: 5px;
+  box-shadow: 4px 4px 2px rgba(0, 0, 0, 0.2);
 }
 
 .RestaurantDetails button,
@@ -131,4 +167,10 @@ form button {
 .UserDetails img {
   width: auto;
   margin: 5px auto;
+}
+
+/* Titles */
+h2 {
+  padding-top: 20px;
+  font-family: "Roboto Slab", serif;
 }

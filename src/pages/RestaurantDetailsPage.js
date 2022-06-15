@@ -21,7 +21,9 @@ function RestaurantDetailsPage() {
 
   const [ratingsList, setRatingsList] = useState([]);
   const [rating, setRatingUser] = useState(0);
-  const [totalRating, setTotalRating] = useState(0);
+  const [totalRating, setTotalRating] = useState();
+
+  const [loading, setLoading] = useState(true);
 
   const storedToken = localStorage.getItem("authToken");
 
@@ -35,12 +37,13 @@ function RestaurantDetailsPage() {
   // Get the ratings of the restaurant
   const getRatings = () => {
     axios
-      .get(`${API_URL}/api/${restaurantId}/ratings`, {
-        headers: { Authorization: `Bearer ${storedToken}` },
-      })
+      .get(`${API_URL}/api/${restaurantId}/ratings`)
       .then((response) => {
-        setRatingsList(response.data);
-        ratingAvg();
+        let filtered = response.data.filter((data) => {
+          return data.rating != 0;
+        });
+        setRatingsList(filtered);
+        setLoading(false);
       })
       .catch((error) => console.log(error));
   };
@@ -63,9 +66,8 @@ function RestaurantDetailsPage() {
       })
       .then((response) => {
         setRatingUser();
-        ratingAvg();
-        getRestaurant();
         getRatings();
+        getRestaurant();
       });
   };
 
@@ -81,10 +83,10 @@ function RestaurantDetailsPage() {
   };
 
   useEffect(() => {
-    ratingAvg();
     getRestaurant();
     getRatings();
-  }, []);
+    ratingAvg();
+  }, [loading]);
 
   return (
     <div className="RestaurantDetails">

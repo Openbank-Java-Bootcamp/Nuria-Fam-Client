@@ -59,6 +59,7 @@ function EditUser(props) {
         setImage("");
         props.refreshUser();
         props.hideForm();
+        window.location.reload(true);
       })
       .catch((error) => {
         const errorDescription = error.response.data.errors[0].defaultMessage;
