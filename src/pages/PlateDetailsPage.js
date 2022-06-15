@@ -61,7 +61,7 @@ function PlateDetailsPage() {
 
           {isLoggedIn && (
             <>
-              // If the user is a restaurant owner
+              {/* If the user is a restaurant owner */}
               <IsOwner>
                 {showForm && (
                   <EditPlate
@@ -69,7 +69,8 @@ function PlateDetailsPage() {
                     hideForm={toggleShowFrom}
                   />
                 )}
-                // Show or hide the form
+
+                {/* Show or hide the form */}
                 <Button onClick={toggleShowFrom}>
                   {showForm ? "Hide From" : "Edit Information"}
                 </Button>

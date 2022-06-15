@@ -69,7 +69,8 @@ function EmployeeDetailsPage() {
                   hideForm={toggleShowFrom}
                 />
               )}
-              // Show or hide form
+
+              {/* Show or hide form */}
               <Button onClick={toggleShowFrom}>
                 {showForm ? "Hide From" : "Edit Information"}
               </Button>

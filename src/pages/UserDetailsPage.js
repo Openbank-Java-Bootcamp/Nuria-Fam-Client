@@ -78,7 +78,7 @@ function UserDetailsPage() {
               {showForm && (
                 <EditUser refreshUser={getUser} hideForm={toggleShowFrom} />
               )}
-              // Show or hide the form
+              {/* Show or hide the form */}
               <Button onClick={toggleShowFrom}>
                 {showForm ? "Hide From" : "Edit Information"}
               </Button>

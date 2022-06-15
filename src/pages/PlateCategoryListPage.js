@@ -45,7 +45,7 @@ function PlateCategoryListPage() {
 
       {isLoggedIn && (
         <>
-          // If the user is a restaurant owner
+          {/* If the user is a restaurant owner */}
           <IsOwner>
             {showForm && (
               <AddPlateCategory
@@ -53,7 +53,8 @@ function PlateCategoryListPage() {
                 hideForm={toggleShowFrom}
               />
             )}
-            // Show or ide the form
+
+            {/* Show or ide the form */}
             <Button onClick={toggleShowFrom}>
               {showForm ? "Hide From" : "Add Category"}
             </Button>

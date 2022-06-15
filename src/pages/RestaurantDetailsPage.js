@@ -106,7 +106,7 @@ function RestaurantDetailsPage() {
           </Text>
           {isLoggedIn && (
             <>
-              // Only the users can rate the restaurants
+              {/* Only the users can rate the restaurants */}
               <IsUser>
                 <label>Rate:</label>
 
@@ -134,7 +134,7 @@ function RestaurantDetailsPage() {
           )}
           {isLoggedIn && (
             <>
-              // If the user is a restaurant owner
+              {/* If the user is a restaurant owner */}
               <IsOwner>
                 {showForm && (
                   <EditRestaurant
@@ -142,20 +142,23 @@ function RestaurantDetailsPage() {
                     hideForm={toggleShowFrom}
                   />
                 )}
-                // Show or hide the form
+
+                {/* Show or hide the form */}
                 <Button onClick={toggleShowFrom}>
                   {showForm ? "Hide From" : "Edit Information"}
                 </Button>
               </IsOwner>
             </>
           )}
-          // Button to show the plates categories list
+
+          {/* Button to show the plates categories list */}
           <Link className="cardButton" to={`/${restaurantId}/platecategory`}>
             <Card hoverable>
               <Text strong>Plates</Text>
             </Card>
           </Link>
-          // Button to show the drink categories list
+
+          {/* Button to show the drink categories list */}
           <Link className="cardButton" to={`/${restaurantId}/drinkcategory`}>
             <Card hoverable>
               <Text strong>Drinks</Text>
@@ -164,7 +167,7 @@ function RestaurantDetailsPage() {
           {isLoggedIn && (
             // If the user is a restaurant owner
             <IsOwner>
-              // Button to show the employee list
+              {/* Button to show the employee list */}
               <Link className="cardButton" to={`/${restaurantId}/employees`}>
                 <Card hoverable>
                   <Text strong>Employees</Text>

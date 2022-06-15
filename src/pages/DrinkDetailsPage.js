@@ -61,7 +61,7 @@ function DrinkDetailsPage() {
 
           {isLoggedIn && (
             <>
-              // If the user is a restaurant owner
+              {/* If the user is a restaurant owner */}
               <IsOwner>
                 {showForm && (
                   <EditDrink
@@ -69,7 +69,8 @@ function DrinkDetailsPage() {
                     hideForm={toggleShowFrom}
                   />
                 )}
-                //Show or hide form
+
+                {/* Show or hide form */}
                 <Button onClick={toggleShowFrom}>
                   {showForm ? "Hide From" : "Edit Information"}
                 </Button>
