@@ -1,11 +1,13 @@
 import { useContext } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../context/auth.context";
 import { Avatar, Button } from "antd";
 import { UserOutlined } from "@ant-design/icons";
 
 function Navbar() {
   const { isLoggedIn, user, logOutUser } = useContext(AuthContext);
+  const navigate = useNavigate();
+
   return (
     <nav className="Navbar">
       <div>
@@ -21,9 +23,20 @@ function Navbar() {
         )}
         <Link to="/">
           <Button className="home" type="link">
-            Home
+            Restaurants
           </Button>
         </Link>
+      </div>
+
+      <div>
+        <Button
+          ghost
+          onClick={() => {
+            navigate(-1);
+          }}
+        >
+          Back
+        </Button>
       </div>
 
       <div>

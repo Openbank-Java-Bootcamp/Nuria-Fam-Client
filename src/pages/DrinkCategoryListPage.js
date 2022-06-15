@@ -1,11 +1,13 @@
 import { useState, useEffect, useContext } from "react";
 import axios from "axios";
-import { List, Button } from "antd";
-import { useNavigate, useParams } from "react-router-dom";
+import { List, Button, Typography } from "antd";
+import { useParams, Link } from "react-router-dom";
 import { AuthContext } from "../context/auth.context";
 import DrinkCategoryCard from "../components/DrinkCategoryCard";
 import AddDrinkCategory from "../components/AddDrinkCategory";
 import IsOwner from "../components/IsOwner";
+
+const { Title } = Typography;
 
 const API_URL = "http://localhost:5005";
 
@@ -15,8 +17,6 @@ function DrinkCategoryListPage() {
 
   const [categories, setCategories] = useState([]);
   const { restaurantId } = useParams();
-
-  const navigate = useNavigate();
 
   const getAllCategories = () => {
     axios
@@ -35,13 +35,12 @@ function DrinkCategoryListPage() {
 
   return (
     <div className="DrinkCategoryList">
-      <Button
-        onClick={() => {
-          navigate(-1);
-        }}
-      >
-        Back
-      </Button>
+      <Link to={`/${restaurantId}/platecategory`}>
+        <Button>Plates</Button>
+      </Link>
+
+      <Title level={2}>Drinks</Title>
+
       {isLoggedIn && (
         <>
           {/* If the user is a restaurant owner */}

@@ -1,6 +1,6 @@
 import { useState, useEffect, useContext } from "react";
 import axios from "axios";
-import { useNavigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { AuthContext } from "../context/auth.context";
 import EditUser from "../components/EditUser";
 import { Image, Button, Typography } from "antd";
@@ -15,8 +15,6 @@ function UserDetailsPage() {
   const [user1, setUser] = useState(null);
   const { userId } = useParams();
   const [role, setRole] = useState(user.role);
-
-  const navigate = useNavigate();
 
   const getUser = () => {
     const storedToken = localStorage.getItem("authToken");
@@ -43,14 +41,6 @@ function UserDetailsPage() {
     <div className="UserDetails">
       {user1 && (
         <>
-          <Button
-            onClick={() => {
-              navigate(-1);
-            }}
-          >
-            Back
-          </Button>
-
           {user1.image == "" ? (
             // If the user doesn't have image
             <Image

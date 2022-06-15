@@ -1,6 +1,6 @@
 import { useState, useEffect, useContext } from "react";
 import axios from "axios";
-import { useNavigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { AuthContext } from "../context/auth.context";
 import EditDrink from "../components/EditDrink";
 import IsOwner from "../components/IsOwner";
@@ -15,8 +15,6 @@ function DrinkDetailsPage() {
 
   const { isLoggedIn } = useContext(AuthContext);
   const [showForm, setForm] = useState(false);
-
-  const navigate = useNavigate();
 
   const getDrink = () => {
     axios
@@ -39,14 +37,6 @@ function DrinkDetailsPage() {
     <div className="DrinkDetails">
       {drink && (
         <>
-          <Button
-            onClick={() => {
-              navigate(-1);
-            }}
-          >
-            Back
-          </Button>
-
           <Image
             alt="Drink image"
             preview={false}

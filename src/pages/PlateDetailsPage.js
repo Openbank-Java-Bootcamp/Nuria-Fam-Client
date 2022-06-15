@@ -1,6 +1,6 @@
 import { useState, useEffect, useContext } from "react";
 import axios from "axios";
-import { useNavigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { AuthContext } from "../context/auth.context";
 import EditPlate from "../components/EditPlate";
 import IsOwner from "../components/IsOwner";
@@ -15,8 +15,6 @@ function PlateDetailsPage() {
 
   const { isLoggedIn } = useContext(AuthContext);
   const [showForm, setForm] = useState(false);
-
-  const navigate = useNavigate();
 
   const getPlate = () => {
     axios
@@ -39,14 +37,6 @@ function PlateDetailsPage() {
     <div className="PlateDetails">
       {plate && (
         <>
-          <Button
-            onClick={() => {
-              navigate(-1);
-            }}
-          >
-            Back
-          </Button>
-
           <Image
             alt="Plate image"
             preview={false}

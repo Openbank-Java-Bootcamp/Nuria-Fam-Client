@@ -1,11 +1,13 @@
 import { useState, useEffect, useContext } from "react";
 import axios from "axios";
-import { useNavigate, useParams } from "react-router-dom";
-import { List, Button } from "antd";
+import { useParams } from "react-router-dom";
+import { List, Button, Typography } from "antd";
 import { AuthContext } from "../context/auth.context";
 import DrinkCard from "../components/DrinkCard";
 import AddDrink from "../components/AddDrink";
 import IsOwner from "../components/IsOwner";
+
+const { Title } = Typography;
 
 const API_URL = "http://localhost:5005";
 
@@ -15,8 +17,6 @@ function DrinkListPage() {
 
   const [drinks, setDrinks] = useState([]);
   const { drinkCategoryId, drinkCategoryName } = useParams();
-
-  const navigate = useNavigate();
 
   const getDrinks = () => {
     axios
@@ -35,15 +35,7 @@ function DrinkListPage() {
 
   return (
     <div className="DrinkList">
-      <Button
-        onClick={() => {
-          navigate(-1);
-        }}
-      >
-        Back
-      </Button>
-
-      <h2>{drinkCategoryName}</h2>
+      <Title level={2}>{drinkCategoryName}</Title>
 
       {isLoggedIn && (
         <>

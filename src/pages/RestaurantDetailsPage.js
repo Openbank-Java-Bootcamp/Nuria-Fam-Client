@@ -97,13 +97,16 @@ function RestaurantDetailsPage() {
             src={restaurant.image}
           />
           <Title level={2}>{restaurant.name}</Title>
+
           <Rate allowHalf disabled value={totalRating} />
+
           <Text className="info">{restaurant.phone}</Text>
           <Text className="info">
             {restaurant.address.street}, {restaurant.address.number}
             <br />
             {restaurant.address.city}, {restaurant.address.country}
           </Text>
+
           {isLoggedIn && (
             <>
               {/* Only the users can rate the restaurants */}
@@ -132,6 +135,7 @@ function RestaurantDetailsPage() {
               </IsUser>
             </>
           )}
+
           {isLoggedIn && (
             <>
               {/* If the user is a restaurant owner */}
@@ -164,6 +168,7 @@ function RestaurantDetailsPage() {
               <Text strong>Drinks</Text>
             </Card>
           </Link>
+
           {isLoggedIn && (
             // If the user is a restaurant owner
             <IsOwner>

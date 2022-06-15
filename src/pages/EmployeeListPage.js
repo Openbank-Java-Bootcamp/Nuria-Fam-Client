@@ -1,7 +1,7 @@
 import { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import { List, Button } from "antd";
-import { useNavigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { AuthContext } from "../context/auth.context";
 
 import EmployeeCard from "../components/EmployeeCard";
@@ -15,8 +15,6 @@ function EmployeeListPage() {
 
   const [employees, setEmployees] = useState([]);
   const { restaurantId } = useParams();
-
-  const navigate = useNavigate();
 
   const getEmployees = () => {
     const storedToken = localStorage.getItem("authToken");
@@ -38,14 +36,6 @@ function EmployeeListPage() {
 
   return (
     <div className="EmployeeList">
-      <Button
-        onClick={() => {
-          navigate(-1);
-        }}
-      >
-        Back
-      </Button>
-
       {isLoggedIn && (
         <>
           {showForm && (

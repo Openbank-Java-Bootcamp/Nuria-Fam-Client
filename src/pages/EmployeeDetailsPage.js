@@ -1,6 +1,6 @@
 import { useState, useEffect, useContext } from "react";
 import axios from "axios";
-import { useNavigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { AuthContext } from "../context/auth.context";
 import EditEmployee from "../components/EditEmployee";
 import { Image, Button, Typography } from "antd";
@@ -14,8 +14,6 @@ function EmployeeDetailsPage() {
 
   const { isLoggedIn } = useContext(AuthContext);
   const [showForm, setForm] = useState(false);
-
-  const navigate = useNavigate();
 
   const getEmployee = () => {
     const storedToken = localStorage.getItem("authToken");
@@ -41,14 +39,6 @@ function EmployeeDetailsPage() {
     <div className="EmployeeDetails">
       {employee && (
         <>
-          <Button
-            onClick={() => {
-              navigate(-1);
-            }}
-          >
-            Back
-          </Button>
-
           <Image
             alt="Employee image"
             preview={false}
