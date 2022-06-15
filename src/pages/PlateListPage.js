@@ -48,16 +48,19 @@ function PlateListPage() {
 
       {isLoggedIn && (
         <>
+          // If the user is a restaurant owner
           <IsOwner>
             {showForm && (
               <AddPlate refreshPlates={getPlates} hideForm={toggleShowFrom} />
             )}
+            // Show or hide the form
             <Button onClick={toggleShowFrom}>
               {showForm ? "Hide From" : "Add Plate"}
             </Button>
           </IsOwner>
         </>
       )}
+
       <List
         grid={{
           gutter: 16,

@@ -5,13 +5,31 @@
 
 /* Cards */
 .cardButton {
-  margin-bottom: 10px;
+  margin-top: 10px;
+}
+
+.RestaurantCard .ant-card-cover img {
+  height: 200px;
+  width: auto;
+  margin: 5px auto;
+}
+
+.PlateCard .ant-card-cover img {
+  width: 250px;
+  height: auto;
+  margin: 5px auto;
 }
 
 .DrinkCard .ant-card-cover img {
   height: 300px;
   width: auto;
-  margin: auto;
+  margin: 5px auto;
+}
+
+.EmployeeCard .ant-card-cover img {
+  height: 200px;
+  width: auto;
+  margin: 5px auto;
 }
 
 /* Navbar */
@@ -112,5 +130,5 @@ form button {
 .EmployeeDetails img,
 .UserDetails img {
   width: auto;
-  margin: auto;
+  margin: 5px auto;
 }

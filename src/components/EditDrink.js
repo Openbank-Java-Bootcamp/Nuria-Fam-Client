@@ -76,7 +76,7 @@ function EditDrink(props) {
 
   return (
     <div className="EditDrink">
-      <h3>Edit Drink</h3>
+      <Title level={5}>Edit Drink</Title>
 
       <Form layout="vertical" onFinish={handleSubmit}>
         <Form.Item label="Name">
@@ -123,7 +123,7 @@ function EditDrink(props) {
         </Button>
       </Form>
 
-      {errorMessage && <p className="error-message">{errorMessage}</p>}
+      {errorMessage && <Text className="error-message">{errorMessage}</Text>}
 
       <Button type="danger" onClick={deleteDrink}>
         Delete Drink

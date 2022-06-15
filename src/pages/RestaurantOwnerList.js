@@ -41,6 +41,7 @@ function RestaurantOwnerListPage() {
           hideForm={toggleShowFrom}
         />
       )}
+      // Show or hide the form
       <Button onClick={toggleShowFrom}>
         {showForm ? "Hide From" : "Add Restaurant"}
       </Button>

@@ -14,14 +14,17 @@ function HomePage() {
       {isLoggedIn && (
         <>
           <Title level={2}>Welcome {user && user.name}!</Title>
+          // If the user is a restaurant owner, show only their restaurants
           <IsOwner>
             <RestaurantOwnerListPage />
           </IsOwner>
+          // If is a user, show all the restaurants
           <IsUser>
             <RestaurantListPage />
           </IsUser>
         </>
       )}
+      // If it's not logged in show all restaurants
       {!isLoggedIn && <RestaurantListPage />}
     </div>
   );

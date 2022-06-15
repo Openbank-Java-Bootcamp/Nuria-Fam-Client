@@ -46,18 +46,22 @@ function DrinkDetailsPage() {
           >
             Back
           </Button>
+
           <Image
             alt="Drink image"
             preview={false}
             height={300}
             src={drink.image}
           />
+
           <Title level={2}>{drink.name}</Title>
+
           <Text className="info">{drink.information}</Text>
           <Text className="info">{drink.price} €</Text>
 
           {isLoggedIn && (
             <>
+              // If the user is a restaurant owner
               <IsOwner>
                 {showForm && (
                   <EditDrink
@@ -65,6 +69,7 @@ function DrinkDetailsPage() {
                     hideForm={toggleShowFrom}
                   />
                 )}
+                //Show or hide form
                 <Button onClick={toggleShowFrom}>
                   {showForm ? "Hide From" : "Edit Information"}
                 </Button>

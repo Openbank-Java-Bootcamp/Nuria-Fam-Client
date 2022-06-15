@@ -1,6 +1,6 @@
 import { useState, useEffect, useContext } from "react";
 import axios from "axios";
-import { useNavigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../context/auth.context";
 import EditRestaurant from "../components/EditRestaurant";
@@ -23,8 +23,6 @@ function RestaurantDetailsPage() {
   const [rating, setRatingUser] = useState(0);
   const [totalRating, setTotalRating] = useState(0);
 
-  const navigate = useNavigate();
-
   const storedToken = localStorage.getItem("authToken");
 
   const getRestaurant = () => {
@@ -34,6 +32,7 @@ function RestaurantDetailsPage() {
       .catch((error) => console.log(error));
   };
 
+  // Get the ratings of the restaurant
   const getRatings = () => {
     axios
       .get(`${API_URL}/api/${restaurantId}/ratings`, {
@@ -70,10 +69,12 @@ function RestaurantDetailsPage() {
       });
   };
 
+  // Average the ratings
   const ratingAvg = () => {
     const sum = ratingsList.reduce((accum, currValue) => {
       return accum + currValue.rating;
     }, 0);
+
     const avg = sum / ratingsList.length;
     const res = Math.round(avg * 100) / 100;
     setTotalRating(res);
@@ -81,8 +82,8 @@ function RestaurantDetailsPage() {
 
   useEffect(() => {
     ratingAvg();
-    getRatings();
     getRestaurant();
+    getRatings();
   }, []);
 
   return (
@@ -96,20 +97,19 @@ function RestaurantDetailsPage() {
             src={restaurant.image}
           />
           <Title level={2}>{restaurant.name}</Title>
-
           <Rate allowHalf disabled value={totalRating} />
-
           <Text className="info">{restaurant.phone}</Text>
           <Text className="info">
             {restaurant.address.street}, {restaurant.address.number}
             <br />
             {restaurant.address.city}, {restaurant.address.country}
           </Text>
-
           {isLoggedIn && (
             <>
+              // Only the users can rate the restaurants
               <IsUser>
                 <label>Rate:</label>
+
                 <Select
                   className="rate"
                   placeholder="Rate"
@@ -132,9 +132,9 @@ function RestaurantDetailsPage() {
               </IsUser>
             </>
           )}
-
           {isLoggedIn && (
             <>
+              // If the user is a restaurant owner
               <IsOwner>
                 {showForm && (
                   <EditRestaurant
@@ -142,27 +142,30 @@ function RestaurantDetailsPage() {
                     hideForm={toggleShowFrom}
                   />
                 )}
+                // Show or hide the form
                 <Button onClick={toggleShowFrom}>
                   {showForm ? "Hide From" : "Edit Information"}
                 </Button>
               </IsOwner>
             </>
           )}
-
+          // Button to show the plates categories list
           <Link className="cardButton" to={`/${restaurantId}/platecategory`}>
             <Card hoverable>
               <Text strong>Plates</Text>
             </Card>
           </Link>
-
+          // Button to show the drink categories list
           <Link className="cardButton" to={`/${restaurantId}/drinkcategory`}>
             <Card hoverable>
               <Text strong>Drinks</Text>
             </Card>
           </Link>
           {isLoggedIn && (
+            // If the user is a restaurant owner
             <IsOwner>
-              <Link to={`/${restaurantId}/employees`}>
+              // Button to show the employee list
+              <Link className="cardButton" to={`/${restaurantId}/employees`}>
                 <Card hoverable>
                   <Text strong>Employees</Text>
                 </Card>

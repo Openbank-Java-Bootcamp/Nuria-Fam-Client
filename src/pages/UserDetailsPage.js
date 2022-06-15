@@ -50,6 +50,7 @@ function UserDetailsPage() {
           >
             Back
           </Button>
+
           {user1.image == "" ? (
             // If the user doesn't have image
             <Image
@@ -66,7 +67,9 @@ function UserDetailsPage() {
               src={user.image}
             />
           )}
+
           <Title level={2}>{user1.name}</Title>
+
           <Text className="info">{user1.email}</Text>
           <Text className="info">{user.role}</Text>
 
@@ -75,6 +78,7 @@ function UserDetailsPage() {
               {showForm && (
                 <EditUser refreshUser={getUser} hideForm={toggleShowFrom} />
               )}
+              // Show or hide the form
               <Button onClick={toggleShowFrom}>
                 {showForm ? "Hide From" : "Edit Information"}
               </Button>

@@ -4,8 +4,9 @@ const { Meta } = Card;
 
 function EmployeeCard(props) {
   const { employee, restaurantId } = props;
+
   return (
-    <div>
+    <div className="EmployeeCard cardButton">
       <Link to={`/${restaurantId}/employees/${employee.id}`}>
         <Card
           hoverable

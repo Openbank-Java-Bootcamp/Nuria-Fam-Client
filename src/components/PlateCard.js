@@ -4,8 +4,9 @@ const { Meta } = Card;
 
 function PlateCard(props) {
   const { plate, plateCategoryId } = props;
+
   return (
-    <div>
+    <div className="PlateCard cardButton">
       <Link to={`/plates/${plateCategoryId}/${plate.id}`}>
         <Card
           hoverable

@@ -47,16 +47,19 @@ function DrinkListPage() {
 
       {isLoggedIn && (
         <>
+          // If the user is a restaurant owner
           <IsOwner>
             {showForm && (
               <AddDrink refreshDrinks={getDrinks} hideForm={toggleShowFrom} />
             )}
+            // Show or hide form
             <Button onClick={toggleShowFrom}>
               {showForm ? "Hide From" : "Add Drink"}
             </Button>
           </IsOwner>
         </>
       )}
+
       <List
         grid={{
           gutter: 16,

@@ -4,6 +4,7 @@ const { Meta } = Card;
 
 function DrinkCard(props) {
   const { drink, drinkCategoryId } = props;
+
   return (
     <div className="DrinkCard">
       <Link to={`/drinks/${drinkCategoryId}/${drink.id}`}>

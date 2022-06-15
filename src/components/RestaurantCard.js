@@ -4,7 +4,7 @@ const { Meta } = Card;
 
 function RestaurantCard({ id, image, name }) {
   return (
-    <div>
+    <div className="RestaurantCard cardButton">
       <Link to={`/restaurants/${id}`}>
         <Card
           hoverable

@@ -48,13 +48,16 @@ function EmployeeDetailsPage() {
           >
             Back
           </Button>
+
           <Image
             alt="Employee image"
             preview={false}
             height={300}
             src={employee.image}
           />
+
           <Title level={2}>{employee.name}</Title>
+
           <Text className="info">{employee.phone}</Text>
           <Text className="info">{employee.jobTitle}</Text>
 
@@ -66,6 +69,7 @@ function EmployeeDetailsPage() {
                   hideForm={toggleShowFrom}
                 />
               )}
+              // Show or hide form
               <Button onClick={toggleShowFrom}>
                 {showForm ? "Hide From" : "Edit Information"}
               </Button>

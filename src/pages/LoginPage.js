@@ -9,7 +9,7 @@ const { Title, Text } = Typography;
 
 const API_URL = "http://localhost:5005";
 
-function LoginPage(props) {
+function LoginPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState(undefined);
@@ -45,6 +45,7 @@ function LoginPage(props) {
   return (
     <div className="LoginPage">
       <Title level={2}>Login</Title>
+
       <Form layout="vertical" onFinish={handleLoginSubmit}>
         <Form.Item
           label="Email"
