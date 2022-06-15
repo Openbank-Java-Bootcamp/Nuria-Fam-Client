@@ -31,7 +31,7 @@ function EditUser(props) {
 
   useEffect(() => {
     axios
-      .get(`${API_URL}/auth/users/${userId}`, {
+      .get(`${API_URL}/api/auth/users/${userId}`, {
         headers: { Authorization: `Bearer ${storedToken}` },
       })
       .then((response) => {
@@ -49,7 +49,7 @@ function EditUser(props) {
     const requestBody = { email, password, name, image, role };
 
     axios
-      .put(`${API_URL}/auth/users/${userId}`, requestBody, {
+      .put(`${API_URL}/api/auth/users/${userId}`, requestBody, {
         headers: { Authorization: `Bearer ${storedToken}` },
       })
       .then((response) => {
@@ -69,7 +69,7 @@ function EditUser(props) {
 
   const deleteUser = () => {
     axios
-      .delete(`${API_URL}/auth/users/${userId}`, {
+      .delete(`${API_URL}/api/auth/users/${userId}`, {
         headers: { Authorization: `Bearer ${storedToken}` },
       })
       .then(() => {
