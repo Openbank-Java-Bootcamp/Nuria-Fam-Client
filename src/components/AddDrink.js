@@ -1,6 +1,5 @@
 import { useState } from "react";
 import axios from "axios";
-import { useParams } from "react-router-dom";
 import { Button, Form, Input, Typography, InputNumber } from "antd";
 const { Title, Text } = Typography;
 const { TextArea } = Input;
@@ -15,7 +14,7 @@ function AddDrink(props) {
 
   const [errorMessage, setErrorMessage] = useState(undefined);
 
-  const { drinkCategoryId } = useParams();
+  const drinkCategoryId = props.category;
 
   const storedToken = localStorage.getItem("authToken");
 

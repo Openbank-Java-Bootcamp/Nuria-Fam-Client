@@ -127,7 +127,8 @@ form button {
 .PlateDetails,
 .DrinkDetails,
 .EmployeeDetails,
-.UserDetails {
+.UserDetails,
+.ErrorPage {
   display: flex;
   flex-direction: column;
   width: 600px;

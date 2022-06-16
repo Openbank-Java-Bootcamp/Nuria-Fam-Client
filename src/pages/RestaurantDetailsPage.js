@@ -1,7 +1,6 @@
 import { useState, useEffect, useContext } from "react";
 import axios from "axios";
-import { useParams } from "react-router-dom";
-import { Link } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import { AuthContext } from "../context/auth.context";
 import EditRestaurant from "../components/EditRestaurant";
 import IsOwner from "../components/IsOwner";
@@ -65,9 +64,10 @@ function RestaurantDetailsPage() {
         headers: { Authorization: `Bearer ${storedToken}` },
       })
       .then((response) => {
-        setRatingUser();
-        getRatings();
         getRestaurant();
+        getRatings();
+        setLoading(true);
+        // ratingAvg();
       });
   };
 
@@ -100,7 +100,10 @@ function RestaurantDetailsPage() {
           />
           <Title level={2}>{restaurant.name}</Title>
 
-          <Rate allowHalf disabled value={totalRating} />
+          <div>
+            <Rate allowHalf disabled value={totalRating} />
+            <Text style={{ marginLeft: 10 }}>{ratingsList.length} ratings</Text>
+          </div>
 
           <Text className="info">{restaurant.phone}</Text>
           <Text className="info">
@@ -113,8 +116,6 @@ function RestaurantDetailsPage() {
             <>
               {/* Only the users can rate the restaurants */}
               <IsUser>
-                <label>Rate:</label>
-
                 <Select
                   className="rate"
                   placeholder="Rate"

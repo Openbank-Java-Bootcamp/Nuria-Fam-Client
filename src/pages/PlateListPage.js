@@ -43,7 +43,11 @@ function PlateListPage({ id, name }) {
           {/* If the user is a restaurant owner */}
           <IsOwner>
             {showForm && (
-              <AddPlate refreshPlates={getPlates} hideForm={toggleShowFrom} />
+              <AddPlate
+                refreshPlates={getPlates}
+                hideForm={toggleShowFrom}
+                category={id}
+              />
             )}
 
             {/* Show or hide form */}

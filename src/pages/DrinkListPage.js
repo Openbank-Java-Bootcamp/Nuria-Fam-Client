@@ -43,7 +43,11 @@ function DrinkListPage({ id, name }) {
           {/* If the user is a restaurant owner */}
           <IsOwner>
             {showForm && (
-              <AddDrink refreshDrinks={getDrinks} hideForm={toggleShowFrom} />
+              <AddDrink
+                refreshDrinks={getDrinks}
+                hideForm={toggleShowFrom}
+                category={id}
+              />
             )}
 
             {/* Show or hide form */}

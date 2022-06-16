@@ -17,6 +17,7 @@ import UserDetailsPage from "./pages/UserDetailsPage";
 
 import { Layout } from "antd";
 import IsPrivate from "./components/IsPrivate";
+import ErrorPage from "./pages/ErrorPage";
 const { Header, Content, Footer } = Layout;
 
 function App() {
@@ -101,6 +102,9 @@ function App() {
                 </IsAnon>
               }
             />
+
+            {/* Error page */}
+            <Route path="*" element={<ErrorPage />} />
           </Routes>
         </Content>
         <Footer>Fam</Footer>
