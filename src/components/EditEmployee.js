@@ -127,7 +127,7 @@ function EditEmployee(props) {
       {errorMessage && <Text className="error-message">{errorMessage}</Text>}
 
       <Button type="danger" onClick={deleteEmployee}>
-        Delete Employee
+        Delete
       </Button>
     </div>
   );

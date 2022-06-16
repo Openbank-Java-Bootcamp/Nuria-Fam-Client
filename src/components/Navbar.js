@@ -2,7 +2,7 @@ import { useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../context/auth.context";
 import { Avatar, Button } from "antd";
-import { UserOutlined } from "@ant-design/icons";
+import { UserOutlined, LeftOutlined } from "@ant-design/icons";
 
 function Navbar() {
   const { isLoggedIn, user, logOutUser } = useContext(AuthContext);
@@ -12,12 +12,13 @@ function Navbar() {
     <nav className="Navbar">
       <div>
         <Button
-          ghost
+          className="back"
+          type="link"
           onClick={() => {
             navigate(-1);
           }}
         >
-          Back
+          <LeftOutlined />
         </Button>
 
         {isLoggedIn && (
@@ -46,10 +47,10 @@ function Navbar() {
         {!isLoggedIn && (
           <>
             <Link to="/signup">
-              <Button type="primary">Sign Up</Button>
+              <Button>Sign Up</Button>
             </Link>
             <Link to="/login">
-              <Button>Login</Button>
+              <Button ghost>Login</Button>
             </Link>
           </>
         )}

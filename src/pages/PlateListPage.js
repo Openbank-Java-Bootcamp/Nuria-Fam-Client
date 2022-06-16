@@ -36,7 +36,7 @@ function PlateListPage({ id, name }) {
 
   return (
     <div className="PlateList">
-      <Title level={2}>{plateCategoryName}</Title>
+      <h2>{plateCategoryName}</h2>
 
       {isLoggedIn && (
         <>

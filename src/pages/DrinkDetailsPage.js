@@ -44,7 +44,7 @@ function DrinkDetailsPage() {
             src={drink.image}
           />
 
-          <Title level={2}>{drink.name}</Title>
+          <h2>{drink.name}</h2>
 
           <Text className="info">{drink.information}</Text>
           <Text className="info">{drink.price} €</Text>

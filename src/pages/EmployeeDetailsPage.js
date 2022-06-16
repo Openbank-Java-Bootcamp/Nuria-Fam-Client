@@ -46,7 +46,7 @@ function EmployeeDetailsPage() {
             src={employee.image}
           />
 
-          <Title level={2}>{employee.name}</Title>
+          <h2>{employee.name}</h2>
 
           <Text className="info">{employee.phone}</Text>
           <Text className="info">{employee.jobTitle}</Text>

@@ -46,8 +46,9 @@ function RestaurantListPage() {
         placeholder="Search a restaurant"
         onChange={handleSearch}
         style={{
-          width: 200,
+          width: 400,
         }}
+        size="large"
         allowClear
         enterButton
       />

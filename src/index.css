@@ -1,7 +1,8 @@
 * {
   margin: 0;
   padding: 0;
-  font-family: "Nanum Gothic", sans-serif;
+  font-family: "Raleway", sans-serif;
+  font-size: 18px;
 }
 
 .ant-layout-content {
@@ -11,7 +12,6 @@
     ),
     url("./assets/bg.jpg");
   background-size: auto;
-  background-repeat: no-repeat;
 }
 
 /* Cards */
@@ -47,19 +47,24 @@
 .Navbar {
   display: flex;
   justify-content: space-between;
+  margin-top: 6px;
 }
 
 .Navbar button {
+  height: auto;
   margin-right: 10px;
 }
 
-.Navbar .restaurants {
+.Navbar .restaurants,
+.Navbar .back,
+.Navbar .restaurants:focus,
+.Navbar .back:focus {
   color: white;
 }
 
-.Navbar .restaurants:hover {
-  color: white;
-  font-size: 18px;
+.Navbar .restaurants:hover,
+.Navbar .back:hover {
+  color: #1890ff;
 }
 
 /* Lists */
@@ -116,10 +121,13 @@ form {
 
 form button {
   border-radius: 3px;
-  height: 30px;
-  width: 20%;
+  width: 30%;
   text-align: center;
   margin: 5px auto;
+}
+
+form label {
+  font-weight: bold;
 }
 
 /* Details page */
@@ -146,19 +154,9 @@ form button {
 .EmployeeDetails button,
 .UserDetails button {
   border-radius: 3px;
-  height: 30px;
   width: 40%;
   text-align: center;
   margin: 5px auto;
-}
-
-.RestaurantDetails .info,
-.PlateDetails .info,
-.DrinkDetails .info,
-.EmployeeDetails .info,
-.UserDetails .info {
-  margin-bottom: 10px;
-  font-size: 16px;
 }
 
 .RestaurantDetails img,
@@ -170,8 +168,33 @@ form button {
   margin: 5px auto;
 }
 
+.RestaurantDetails span,
+.PlateDetails span,
+.DrinkDetails span,
+.EmployeeDetails span,
+.UserDetails span {
+  font-size: 20px;
+}
+
+.RestaurantDetails ul li span svg {
+  font-size: 30px;
+  margin-bottom: 8px;
+}
+
 /* Titles */
 h2 {
+  font-size: 40px;
   padding-top: 20px;
   font-family: "Roboto Slab", serif;
+}
+
+/* Footer */
+footer {
+  font-family: "Roboto Slab", serif;
+}
+
+/* Button in categories pages */
+.button1 {
+  width: 200px;
+  border-color: black;
 }

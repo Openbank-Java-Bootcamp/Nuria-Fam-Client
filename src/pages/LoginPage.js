@@ -44,7 +44,7 @@ function LoginPage() {
 
   return (
     <div className="LoginPage">
-      <Title level={2}>Login</Title>
+      <h2>Login</h2>
 
       <Form layout="vertical" onFinish={handleLoginSubmit}>
         <Form.Item

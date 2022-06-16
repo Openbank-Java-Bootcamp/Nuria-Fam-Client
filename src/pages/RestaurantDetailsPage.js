@@ -98,14 +98,13 @@ function RestaurantDetailsPage() {
             height={300}
             src={restaurant.image}
           />
-          <Title level={2}>{restaurant.name}</Title>
+          <h2>{restaurant.name}</h2>
 
-          <div>
-            <Rate allowHalf disabled value={totalRating} />
-            <Text style={{ marginLeft: 10 }}>{ratingsList.length} ratings</Text>
-          </div>
-
+          <Rate allowHalf disabled value={totalRating} />
+          <Text>{ratingsList.length} ratings</Text>
+          <br />
           <Text className="info">{restaurant.phone}</Text>
+          <br />
           <Text className="info">
             {restaurant.address.street}, {restaurant.address.number}
             <br />

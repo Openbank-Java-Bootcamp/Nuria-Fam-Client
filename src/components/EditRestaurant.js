@@ -166,7 +166,7 @@ function EditRestaurant(props) {
       {errorMessage && <Text className="error-message">{errorMessage}</Text>}
 
       <Button type="danger" onClick={deleteRestaurant}>
-        Delete Restaurant
+        Delete
       </Button>
     </div>
   );

@@ -36,7 +36,9 @@ function PlateCategoryListPage() {
   return (
     <div className="PlateCategoryList">
       <Link to={`/${restaurantId}/drinkcategory`}>
-        <Button>Drinks</Button>
+        <Button ghost className="button1">
+          Drinks
+        </Button>
       </Link>
 
       <div className="list">

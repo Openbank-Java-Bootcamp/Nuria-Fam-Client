@@ -13,7 +13,7 @@ function HomePage() {
     <div className="HomePage">
       {isLoggedIn && (
         <>
-          <Title level={2}>Welcome {user && user.name}!</Title>
+          <h2>Welcome {user && user.name}!</h2>
           {/* If the user is a restaurant owner, show only their restaurants */}
           <IsOwner>
             <RestaurantOwnerListPage />

@@ -44,7 +44,7 @@ function PlateDetailsPage() {
             src={plate.image}
           />
 
-          <Title level={2}>{plate.name}</Title>
+          <h2>{plate.name}</h2>
 
           <Text className="info">{plate.ingredients}</Text>
           <Text className="info">{plate.price} €</Text>

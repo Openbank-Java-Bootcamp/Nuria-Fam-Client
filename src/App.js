@@ -23,8 +23,8 @@ const { Header, Content, Footer } = Layout;
 function App() {
   return (
     <div className="App">
-      <Layout>
-        <Header>
+      <Layout style={{ minHeight: "100vh" }}>
+        <Header style={{ height: 80 }}>
           <Navbar />
         </Header>
         <Content>
@@ -107,7 +107,7 @@ function App() {
             <Route path="*" element={<ErrorPage />} />
           </Routes>
         </Content>
-        <Footer>Fam</Footer>
+        <Footer style={{ fontSize: 20 }}>Fam by Núria Mafé</Footer>
       </Layout>
     </div>
   );

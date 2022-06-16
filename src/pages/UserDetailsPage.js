@@ -57,7 +57,7 @@ function UserDetailsPage() {
             />
           )}
 
-          <Title level={2}>{user1.name}</Title>
+          <h2>{user1.name}</h2>
 
           <Text className="info">{user1.email}</Text>
           <Text className="info">{user.role}</Text>

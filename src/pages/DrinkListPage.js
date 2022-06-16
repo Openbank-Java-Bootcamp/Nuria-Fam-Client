@@ -36,7 +36,7 @@ function DrinkListPage({ id, name }) {
 
   return (
     <div className="DrinkList">
-      <Title level={2}>{drinkCategoryName}</Title>
+      <h2>{drinkCategoryName}</h2>
 
       {isLoggedIn && (
         <>

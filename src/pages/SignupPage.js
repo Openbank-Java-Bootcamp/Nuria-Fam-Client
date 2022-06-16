@@ -45,7 +45,7 @@ function SignupPage() {
 
   return (
     <div className="SignupPage">
-      <Title level={2}>Sign up</Title>
+      <h2>Sign up</h2>
 
       <Form layout="vertical" onFinish={handleSignupSubmit}>
         <Form.Item
