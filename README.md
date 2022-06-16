@@ -80,4 +80,6 @@ Link to the [Trello](https://trello.com/invite/b/dY098zTk/8f889a099ca009a7e1f558
 
 [Ant Design](https://ant.design/components/overview/)
 
+Final project [presentation](https://docs.google.com/presentation/d/15XTsBfbgn1D-J0ZxeOBFoK5C12sXw1bEIVDlMKhloow/edit?usp=sharing)
+
 Thank you Raymond and Shaun for all the help during this project.
