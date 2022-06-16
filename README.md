@@ -77,6 +77,7 @@ Also work on the design for the user experience and make it responsive, for mobi
 
 ## Resources
 Link to the [Trello](https://trello.com/invite/b/dY098zTk/8f889a099ca009a7e1f5582c379e9d72/final-project) board.
+
 [Ant Design](https://ant.design/components/overview/)
 
 Thank you Raymond and Shaun for all the help during this project.
