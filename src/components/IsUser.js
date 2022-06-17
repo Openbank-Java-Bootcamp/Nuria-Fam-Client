@@ -7,7 +7,7 @@ function IsUser({ children }) {
   // If the authentication is still loading
   if (isLoading) return <p>Loading ...</p>;
 
-  if (user.role == "USER") {
+  if (user.role == "ROLE_USER") {
     return children;
   }
 }

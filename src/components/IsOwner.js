@@ -7,7 +7,7 @@ function IsOwner({ children }) {
   // If the authentication is still loading
   if (isLoading) return <p>Loading ...</p>;
 
-  if (user.role == "OWNER") {
+  if (user.role == "ROLE_OWNER") {
     return children;
   }
 }

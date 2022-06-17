@@ -104,8 +104,8 @@ function SignupPage() {
             }}
             onChange={handleRole}
           >
-            <Option value="owner">Owner</Option>
-            <Option value="user">User</Option>
+            <Option value="role_owner">Owner</Option>
+            <Option value="role_user">User</Option>
           </Select>
         </Form.Item>
 
